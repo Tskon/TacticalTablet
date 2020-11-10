@@ -6,3 +6,7 @@ Without registration.
 # Docker
 copy and rename file `docker-compose.yml.example` to `docker-compose.yml`
 replace root and password on yours
+
+# Server setup
+copy and rename file `.env.example` to `.env`
+replace mongo links on yours
