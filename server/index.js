@@ -6,6 +6,7 @@ const fileUpload = require('express-fileupload')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const mongoose = require('mongoose')
+const api = require('./api/index')
 
 // const WebSocket = require('ws')
 // const UUID = require('uuid')
@@ -34,20 +35,13 @@ app
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))
   .use(cookieParser())
-
-  // Serve the static files from the SPA
   .use(express.static(path.resolve(__dirname, '../dist')))
 
-  /**
-   * for all the SPA stuff
-   */
+  .use('/api', api)
   .get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../dist/index.html'))
   })
 
-/**
- * Listening port by express
- */
 const PORT = process.env.PORT || 9978
 app.listen(PORT, (err) => {
   if (err) throw err
