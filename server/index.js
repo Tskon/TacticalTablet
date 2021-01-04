@@ -1,12 +1,16 @@
-const cors = require('cors')
-const path = require('path')
-require('dotenv').config({path:path.resolve(__dirname, '../.env')})
-const express = require('express')
-const fileUpload = require('express-fileupload')
-const bodyParser = require('body-parser')
-const cookieParser = require('cookie-parser')
-const mongoose = require('mongoose')
-const api = require('./api/index')
+import cors from 'cors'
+import path from 'path'
+import express from 'express'
+import fileUpload from 'express-fileupload'
+import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
+import mongoose from 'mongoose'
+import dotenv from 'dotenv'
+import { fileURLToPath } from 'url'
+import api from './api/index.js'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config({path:path.resolve(__dirname, '../.env')})
 
 // const WebSocket = require('ws')
 // const UUID = require('uuid')

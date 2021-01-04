@@ -1,8 +1,8 @@
-const express = require('express')
-const router = express.Router()
+import express from 'express'
+import tablet from './tablet.js'
 
-const tablet = require('./tablet')
+const router = express.Router()
 
 router.post('/tablet', tablet.create)
 
-module.exports = router
+export default router

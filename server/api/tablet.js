@@ -1,7 +1,9 @@
-const { v4: uuid } = require('uuid')
+import { v4 as uuid} from 'uuid'
 
-module.exports = {
+// TODO add module import
+
+export default {
   create(req, res) {
-    res.send(`create new uniq id: ${uuid()}`)
+    res.send({status: 'ok'})
   },
 }
