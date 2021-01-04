@@ -30,7 +30,11 @@ mongoose.connect(process.env.MONGO_URL, {
   useUnifiedTopology: true
 })
   .then(() => {console.log('connection successful')})
-  .catch((err) => {console.log(err)})
+  .catch((err) => {
+    // TODO didnt work connection to db =(
+    console.log(`connection url: ${process.env.MONGO_URL}`)
+    console.log(err)
+  })
 
 const app = express()
 app

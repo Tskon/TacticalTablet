@@ -1,9 +1,12 @@
 import { v4 as uuid} from 'uuid'
-
-// TODO add module import
+import Tablet from '../dbModels/Tablet.js'
 
 export default {
-  create(req, res) {
+  async create(req, res) {
+    await Tablet.create({
+      editId: `edit-${uuid}`,
+      viewId: `view-${uuid}`,
+    })
     res.send({status: 'ok'})
   },
 }

@@ -7,4 +7,4 @@ const TabletSchema = new Schema({
   viewId: String,
 })
 
-const Tablet = mongoose.model('Tablet', TabletSchema)
+export default mongoose.model('Tablet', TabletSchema)
