@@ -7,7 +7,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root-username
       MONGO_INITDB_ROOT_PASSWORD: root-password
     ports:
-      - 27020:27020
+      - 27017:27017
     volumes:
       - ./mongodbStorage:/data/db
     restart: always
