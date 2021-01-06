@@ -23,6 +23,7 @@ module.exports = function (env, argv) {
   }
 
   return {
+    target: 'web',
     devServer: {
       contentBase: path.join(__dirname, 'dist'),
       compress: true,
@@ -32,6 +33,7 @@ module.exports = function (env, argv) {
       hot: true,
       open: true,
       historyApiFallback: true,
+      liveReload: true,
     },
     resolve: {
       extensions: [".js", ".jsx"],
