@@ -31,7 +31,7 @@ module.exports = function (env, argv) {
       watchContentBase: true,
       progress: true,
       hot: true,
-      open: true,
+      open: false,
       historyApiFallback: true,
       liveReload: true,
     },
@@ -46,6 +46,14 @@ module.exports = function (env, argv) {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ['babel-loader'],
+      },
+      {
+        test: /\.s?css$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          "sass-loader",
+        ],
       },
     ] },
     plugins: [
