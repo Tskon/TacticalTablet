@@ -1,12 +1,9 @@
-import path from 'path'
-import { fileURLToPath } from 'url'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
-import WebpackNotifierPlugin from 'webpack-notifier'
-import { CleanWebpackPlugin } from 'clean-webpack-plugin'
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const WebpackNotifierPlugin = require('webpack-notifier')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-export default (env, argv) => {
+module.exports = function (env, argv) {
   const watchMode = argv.liveReload || false
   const modeEnv = argv.mode || 'development'
   const isProd = modeEnv === 'production'

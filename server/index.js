@@ -25,7 +25,10 @@ dotenv.config({path:path.resolve(__dirname, '../.env')})
 
 mongoose.Promise = global.Promise
 
-mongoose.connect(process.env.MONGO_URL)
+mongoose.connect(process.env.MONGO_URL, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+})
   .then(() => {console.log('connection successful')})
   .catch((err) => {
     // TODO didnt work connection to db =(
