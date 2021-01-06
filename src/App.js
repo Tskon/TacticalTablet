@@ -1,6 +1,6 @@
 import React from 'react'
 import DefaultTemplate from '~/templates/DefaultTemplate'
-import AppRouter from '~/pages/AppRouter'
+import AppRouter from '~/AppRouter'
 
 function App() {
   return (
