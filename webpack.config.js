@@ -39,7 +39,13 @@ module.exports = function (env, argv) {
         '~': path.resolve(__dirname, 'src')
       }
     },
-    module: { rules: [] },
+    module: { rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: ['babel-loader'],
+      },
+    ] },
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({ template: './src/html/index.html' }),
