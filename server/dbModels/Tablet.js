@@ -7,4 +7,6 @@ const TabletSchema = new Schema({
   viewId: String,
 })
 
+TabletSchema.set('timestamps', true)
+
 export default mongoose.model('Tablet', TabletSchema)
