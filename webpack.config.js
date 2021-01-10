@@ -58,6 +58,14 @@ module.exports = function (env, argv) {
             }
           },
           "sass-loader",
+          { loader: 'sass-resources-loader',
+            options: {
+              sourceMap: true,
+              resources: [
+                './src/common/styles/variables.scss',
+              ]
+            }
+          }
         ],
       },
     ] },

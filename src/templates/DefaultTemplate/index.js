@@ -1,4 +1,5 @@
 import React from 'react'
+import '~/common/styles/reset.scss'
 import styles from './index.scss'
 
 export default function DefaultTemplate(props) {
