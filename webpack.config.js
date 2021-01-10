@@ -51,7 +51,12 @@ module.exports = function (env, argv) {
         test: /\.s?css$/i,
         use: [
           "style-loader",
-          "css-loader",
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            }
+          },
           "sass-loader",
         ],
       },
