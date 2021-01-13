@@ -8,11 +8,12 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 module.exports = function (env, argv) {
   const watchMode = argv.liveReload || false
   const modeEnv = argv.mode || 'development'
-  const env = dotenv.config().parsed
+  const appEnv = dotenv.config().parsed
+
   const envKeys = {
     process: {
       env: {
-        API_URL: JSON.stringify(env.API_URL)
+        API_URL: JSON.stringify(appEnv.API_URL)
       }
     }
   }
