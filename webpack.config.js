@@ -1,4 +1,6 @@
 const path = require('path')
+const dotenv = require('dotenv')
+const { DefinePlugin } = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackNotifierPlugin = require('webpack-notifier')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -6,7 +8,14 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 module.exports = function (env, argv) {
   const watchMode = argv.liveReload || false
   const modeEnv = argv.mode || 'development'
-  const isProd = modeEnv === 'production'
+  const env = dotenv.config().parsed
+  const envKeys = {
+    process: {
+      env: {
+        API_URL: JSON.stringify(env.API_URL)
+      }
+    }
+  }
 
   const optimization = {
     splitChunks: {
@@ -41,35 +50,39 @@ module.exports = function (env, argv) {
         '~': path.resolve(__dirname, 'src')
       }
     },
-    module: { rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: ['babel-loader'],
-      },
-      {
-        test: /\.s?css$/i,
-        use: [
-          "style-loader",
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
+    module: {
+      rules: [
+        {
+          test: /\.(js|jsx)$/,
+          exclude: /node_modules/,
+          use: ['babel-loader'],
+        },
+        {
+          test: /\.s?css$/i,
+          use: [
+            "style-loader",
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+              }
+            },
+            "sass-loader",
+            {
+              loader: 'sass-resources-loader',
+              options: {
+                sourceMap: true,
+                resources: [
+                  './src/common/styles/variables.scss',
+                ]
+              }
             }
-          },
-          "sass-loader",
-          { loader: 'sass-resources-loader',
-            options: {
-              sourceMap: true,
-              resources: [
-                './src/common/styles/variables.scss',
-              ]
-            }
-          }
-        ],
-      },
-    ] },
+          ],
+        },
+      ]
+    },
     plugins: [
+      new DefinePlugin(envKeys),
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({ template: './src/html/index.html' }),
       new WebpackNotifierPlugin({ alwaysNotify: true, emoji: true }),
