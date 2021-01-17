@@ -13,7 +13,8 @@ module.exports = function (env, argv) {
   const envKeys = {
     process: {
       env: {
-        API_URL: JSON.stringify(appEnv.API_URL)
+        API_URL: JSON.stringify(appEnv.API_URL),
+        EXPIRE_PERIOD: JSON.stringify(appEnv.EXPIRE_PERIOD),
       }
     }
   }
