@@ -1,13 +1,10 @@
 import React from 'react'
-import Button from '@material-ui/core/Button'
+import createTablet from '~/common/js/createTablet'
 
 export default function Main() {
   return (
-    <Button
-      variant="contained"
-      color="primary"
-    >
+    <button onClick={createTablet}>
       Создать планшет
-    </Button>
+    </button>
   )
 }
