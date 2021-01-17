@@ -3,7 +3,8 @@
   "scripts": {
     "watch": "webpack serve --config webpack.config.js --mode development",
     "build": "webpack --config webpack.config.js --mode production",
-    "dev": "webpack --config webpack.config.js --mode development"
+    "dev": "webpack --config webpack.config.js --mode development",
+    "dev-server": "nodemon ./index.js"
   },
   "browserslist": [
     "last 2 versions"
@@ -15,6 +16,7 @@
     "dotenv": "8.2.0",
     "express": "4.17.1",
     "express-fileupload": "1.2.0",
+    "js-cookie": "2.2.1",
     "mongoose": "5.10.13",
     "react": "17.0.1",
     "react-dom": "17.0.1",
