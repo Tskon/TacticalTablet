@@ -1,0 +1,14 @@
+{
+  "rules": {
+    "semi": 0,
+    "quotes": ["error", "single"],
+    "no-trailing-spaces": "error",
+    "comma-dangle": ["error", "always"]
+  },
+  "parser": "babel-eslint",
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended"
+  ]
+}
