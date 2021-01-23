@@ -3,7 +3,8 @@
     "semi": 0,
     "quotes": ["error", "single"],
     "no-trailing-spaces": "error",
-    "comma-dangle": ["error", "always"]
+    "comma-dangle": ["error", "only-multiline"],
+    "object-curly-spacing": 2
   },
   "parser": "babel-eslint",
   "extends": [
