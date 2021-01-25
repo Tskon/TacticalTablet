@@ -7,7 +7,7 @@ function App() {
     <DefaultTemplate>
       <AppRouter/>
     </DefaultTemplate>
-  );
+  )
 }
 
-export default App;
+export default App
