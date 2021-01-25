@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import cookies from 'js-cookie'
+import Pixi from '~/components/pixi'
 
 export default function Tablet({slug}) {
   useEffect(() => {
@@ -13,6 +14,7 @@ export default function Tablet({slug}) {
   return (
     <div>
       <h2>Страница планшета {slug}</h2>
+      <Pixi/>
     </div>
   )
 }

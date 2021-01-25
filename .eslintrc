@@ -2,6 +2,7 @@
   "rules": {
     "semi": 0,
     "quotes": ["error", "single"],
+    "indent": ["error", 2],
     "no-trailing-spaces": "error",
     "comma-dangle": ["error", "only-multiline"],
     "object-curly-spacing": 2
@@ -11,5 +12,9 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended"
-  ]
+  ],
+  "env": {
+    "browser": true,
+    "node": true
+  }
 }
