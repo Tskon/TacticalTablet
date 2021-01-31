@@ -7,13 +7,6 @@ import medium from '~/common/images/wot/medium.png'
 
 const sprite = PIXI.Sprite.from
 
-const sprites = {
-  art: sprite(art),
-  light: sprite(light),
-  medium: sprite(medium),
-  heavy: sprite(heavy),
-}
-
 const app = new PIXI.Application({
   width: window.innerWidth - 10,
   height: window.innerHeight - 150,
@@ -24,14 +17,48 @@ const app = new PIXI.Application({
   backgroundColor: 0x061639,
 })
 
+const dragNDrop = {
+  onDragStart(event) {
+    this.data = event.data;
+    this.alpha = 0.5;
+    this.dragging = true;
+  },
+  onDragEnd() {
+    this.alpha = 1;
+    this.dragging = false;
+    this.data = null;
+  },
+  onDragMove() {
+    if (this.dragging) {
+      const newPosition = this.data.getLocalPosition(this.parent);
+      this.x = newPosition.x;
+      this.y = newPosition.y;
+    }
+  }
+}
+
+const addIcon = (img) => {
+  const icon = sprite(img)
+  icon.interactive = true
+  icon.buttonMode = true
+  icon.anchor.set(0.5, 0.5)
+  icon
+    .on('pointerdown', dragNDrop.onDragStart)
+    .on('pointerup', dragNDrop.onDragEnd)
+    .on('pointerupoutside', dragNDrop.onDragEnd)
+    .on('pointermove', dragNDrop.onDragMove)
+
+  app.stage.addChild(icon)
+}
+
 export default () => {
   const canvas = useRef()
 
   useEffect(() => {
-    app.stage.addChild(sprites.art)
-    app.stage.addChild(sprites.light)
-    app.stage.addChild(sprites.medium)
-    app.stage.addChild(sprites.heavy)
+    addIcon(art)
+    addIcon(light)
+    addIcon(medium)
+    addIcon(heavy)
 
     document.getElementById('pixi-container').appendChild(app.view)
     // canvas.appendChild(app.view)
