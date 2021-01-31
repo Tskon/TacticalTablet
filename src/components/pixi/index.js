@@ -19,25 +19,27 @@ const app = new PIXI.Application({
 
 const dragNDrop = {
   onDragStart(event) {
-    this.data = event.data;
-    this.alpha = 0.5;
-    this.dragging = true;
+    this.data = event.data
+    this.alpha = 0.5
+    this.dragging = true
   },
   onDragEnd() {
-    this.alpha = 1;
-    this.dragging = false;
-    this.data = null;
+    this.alpha = 1
+    this.dragging = false
+    this.data = null
+    // TODO save coords from this.x / this.y
   },
   onDragMove() {
     if (this.dragging) {
-      const newPosition = this.data.getLocalPosition(this.parent);
-      this.x = newPosition.x;
-      this.y = newPosition.y;
+      const newPosition = this.data.getLocalPosition(this.parent)
+      this.x = newPosition.x
+      this.y = newPosition.y
+      // TODO periodically save coords from newPosition.x / newPosition.y
     }
   }
 }
 
-const addIcon = (img, x = 0, y = 0) => {
+const addIcon = (img, x = 0, y = 0, color) => {
   const icon = sprite(img)
   icon.interactive = true
   icon.buttonMode = true
@@ -49,6 +51,7 @@ const addIcon = (img, x = 0, y = 0) => {
     .on('pointermove', dragNDrop.onDragMove)
   icon.x = x
   icon.y = y
+  if (color) icon.tint = color
 
   app.stage.addChild(icon)
 }
@@ -57,10 +60,10 @@ export default () => {
   const canvas = useRef()
 
   useEffect(() => {
-    addIcon(art, 100, 50)
-    addIcon(light, 200, 100)
-    addIcon(medium, 300, 300)
-    addIcon(heavy, 400, 50)
+    addIcon(art, 100, 50, 0xFF0000)
+    addIcon(light, 200, 100, 0xFF0000)
+    addIcon(medium, 300, 300, 0x00FF00)
+    addIcon(heavy, 400, 50, 0x00FF00)
 
     document.getElementById('pixi-container').appendChild(app.view)
     // canvas.appendChild(app.view)
