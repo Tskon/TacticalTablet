@@ -37,7 +37,7 @@ const dragNDrop = {
   }
 }
 
-const addIcon = (img) => {
+const addIcon = (img, x = 0, y = 0) => {
   const icon = sprite(img)
   icon.interactive = true
   icon.buttonMode = true
@@ -47,6 +47,8 @@ const addIcon = (img) => {
     .on('pointerup', dragNDrop.onDragEnd)
     .on('pointerupoutside', dragNDrop.onDragEnd)
     .on('pointermove', dragNDrop.onDragMove)
+  icon.x = x
+  icon.y = y
 
   app.stage.addChild(icon)
 }
@@ -55,13 +57,15 @@ export default () => {
   const canvas = useRef()
 
   useEffect(() => {
-    addIcon(art)
-    addIcon(light)
-    addIcon(medium)
-    addIcon(heavy)
+    addIcon(art, 100, 50)
+    addIcon(light, 200, 100)
+    addIcon(medium, 300, 300)
+    addIcon(heavy, 400, 50)
 
     document.getElementById('pixi-container').appendChild(app.view)
     // canvas.appendChild(app.view)
+
+    setInterval(() => {console.log(app)}, 10000)
   }, [])
 
   return (
