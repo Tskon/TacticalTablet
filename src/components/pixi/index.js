@@ -65,14 +65,9 @@ export default () => {
     addIcon(medium, 300, 300, 0x00FF00)
     addIcon(heavy, 400, 50, 0x00FF00)
 
-    document.getElementById('pixi-container').appendChild(app.view)
-    // canvas.appendChild(app.view)
-
-    setInterval(() => {console.log(app)}, 10000)
+    canvas.current.appendChild(app.view)
   }, [])
 
-  return (
-    <div ref={canvas} id="pixi-container"></div>
-  )
+  return (<div ref={canvas}></div>)
 }
 
