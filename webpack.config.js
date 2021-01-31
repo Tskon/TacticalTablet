@@ -1,9 +1,9 @@
 const path = require('path')
 const dotenv = require('dotenv')
-const { DefinePlugin } = require('webpack')
+const {DefinePlugin} = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackNotifierPlugin = require('webpack-notifier')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
 module.exports = function (env, argv) {
   const watchMode = argv.liveReload || false
@@ -47,7 +47,7 @@ module.exports = function (env, argv) {
       liveReload: true,
     },
     resolve: {
-      extensions: [".js", ".jsx"],
+      extensions: ['.js', '.jsx'],
       alias: {
         '~': path.resolve(__dirname, 'src')
       }
@@ -62,14 +62,14 @@ module.exports = function (env, argv) {
         {
           test: /\.s?css$/i,
           use: [
-            "style-loader",
+            'style-loader',
             {
               loader: 'css-loader',
               options: {
                 modules: true,
               }
             },
-            "sass-loader",
+            'sass-loader',
             {
               loader: 'sass-resources-loader',
               options: {
@@ -81,13 +81,17 @@ module.exports = function (env, argv) {
             }
           ],
         },
+        {
+          test: /\.(png|jpe?g)$/,
+          use: ['file-loader'],
+        },
       ]
     },
     plugins: [
       new DefinePlugin(envKeys),
       new CleanWebpackPlugin(),
-      new HtmlWebpackPlugin({ template: './src/html/index.html' }),
-      new WebpackNotifierPlugin({ alwaysNotify: true, emoji: true }),
+      new HtmlWebpackPlugin({template: './src/html/index.html'}),
+      new WebpackNotifierPlugin({alwaysNotify: true, emoji: true}),
     ],
     entry: './src/client.js',
     output: {
@@ -95,7 +99,7 @@ module.exports = function (env, argv) {
       path: path.resolve(__dirname, 'dist'),
       publicPath: '/'
     },
-    performance: { hints: false },
+    performance: {hints: false},
     optimization,
   }
 }
