@@ -9,7 +9,12 @@ import heavy from '~/common/images/wot/heavy.png'
 import art from '~/common/images/wot/art.png'
 
 const icons = [light, medium, heavy, art, light, medium, heavy, art, light, medium, heavy, art]
-new Panel(app, icons)
+new Panel(app, icons, {
+  panelWidth: 300,
+  iconSize: 100,
+  gap: 10,
+  inRowCount: 3,
+})
 
 export default () => {
   const canvas = useRef()

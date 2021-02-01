@@ -5,13 +5,13 @@ const graphics = new Graphics()
 
 export default class Panel {
   constructor(app, icons = [], options = {}) {
-    const {panelWidth, iconSize, gap, rowCount} = options
+    const {panelWidth, iconSize, gap, inRowCount} = options
     this.app = app
     this.icons = icons
     this.panelWidth = panelWidth || 300
     this.iconSize = iconSize || 100
     this.gap = gap || 10
-    this.rowCount = rowCount || 3
+    this.inRowCount = inRowCount || 3
 
     this.iconFactory = new IconFactory(app)
     this.init()
@@ -26,8 +26,8 @@ export default class Panel {
     this.app.stage.addChild(graphics)
 
     this.icons.forEach((icon, i) => {
-      const kx = (i % this.rowCount) * this.iconSize + (this.iconSize/2) + this.gap
-      const ky = (Math.floor(i/this.rowCount) * this.iconSize) + (this.iconSize/2) + this.gap
+      const kx = (i % this.inRowCount) * this.iconSize + (this.iconSize/2) + this.gap
+      const ky = (Math.floor(i/this.inRowCount) * this.iconSize) + (this.iconSize/2) + this.gap
       this.iconFactory.addButton(icon, width - this.panelWidth + kx, ky, this.iconSize, this.iconSize)
     })
   }
