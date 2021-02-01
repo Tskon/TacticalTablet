@@ -26,8 +26,8 @@ export default class Panel {
     this.app.stage.addChild(graphics)
 
     this.icons.forEach((icon, i) => {
-      const kx = (i % 3) * this.iconSize + (this.iconSize/2) + this.gap
-      const ky = (Math.floor(i/3) * this.iconSize) + (this.iconSize/2) + this.gap
+      const kx = (i % this.rowCount) * this.iconSize + (this.iconSize/2) + this.gap
+      const ky = (Math.floor(i/this.rowCount) * this.iconSize) + (this.iconSize/2) + this.gap
       this.iconFactory.addButton(icon, width - this.panelWidth + kx, ky, this.iconSize, this.iconSize)
     })
   }
