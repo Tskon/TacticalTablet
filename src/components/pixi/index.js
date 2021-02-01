@@ -1,5 +1,4 @@
 import React, {useEffect, useRef} from 'react'
-import * as PIXI from 'pixi.js'
 import app from './app'
 import Panel from './Panel';
 
