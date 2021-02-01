@@ -24,6 +24,7 @@ export default class Panel {
     graphics.drawRect(width - this.panelWidth, 0, this.panelWidth, height);
     graphics.endFill();
     this.app.stage.addChild(graphics)
+
     this.icons.forEach((icon, i) => {
       const kx = (i % 3) * this.iconSize + (this.iconSize/2) + this.gap
       const ky = (Math.floor(i/3) * this.iconSize) + (this.iconSize/2) + this.gap
