@@ -1,9 +1,23 @@
 import {Sprite} from 'pixi.js'
 const sprite = Sprite.from
 
-export default class IconFabric {
+export default class IconFactory {
   constructor(app) {
     this.app = app
+  }
+
+  addButton(img, x, y, width = 50, heigth = 50) {
+    const icon = sprite(img)
+    icon.interactive = true
+    icon.buttonMode = true
+    icon.anchor.set(0.5, 0.5)
+    icon.x = x
+    icon.y = y
+    icon.width = width
+    icon.height = heigth
+    icon.on('pointerdown', () => {this.add(img, x, y, Math.random() * 0xffffff)})
+
+    this.app.stage.addChild(icon)
   }
 
   add(img, x = 0, y = 0, color) {
