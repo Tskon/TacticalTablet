@@ -6,7 +6,7 @@ import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
-import { fileURLToPath } from 'url'
+import {fileURLToPath} from 'url'
 import api from './api/index.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -39,9 +39,9 @@ mongoose.connect(process.env.MONGO_URL, {
 const app = express()
 app
   .use(cors())
-  .use(fileUpload({ createParentPath: true }))
+  .use(fileUpload({createParentPath: true}))
   .use(bodyParser.json())
-  .use(bodyParser.urlencoded({ extended: true }))
+  .use(bodyParser.urlencoded({extended: true}))
   .use(cookieParser())
   .use(express.static(path.resolve(__dirname, '../dist')))
 
