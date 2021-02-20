@@ -1,14 +1,17 @@
 import React, {useEffect} from 'react'
-import cookies from 'js-cookie'
+import jsCookie from 'js-cookie'
+
 import Pixi from '~/components/pixi'
+
 
 export default function Tablet({slug}) {
   useEffect(() => {
-    const tabletsList = JSON.parse(cookies.get('tablets')) || []
+    const cookies = jsCookie.get('tablets')
+    const tabletsList = JSON.parse(cookies)
     if (!tabletsList.includes(slug)) {
       tabletsList.push(slug)
     }
-    cookies.set('tablets', tabletsList, {expires: +process.env.EXPIRE_PERIOD})
+    jsCookie.set('tablets', tabletsList, {expires: +process.env.EXPIRE_PERIOD})
   }, [])
 
   return (
