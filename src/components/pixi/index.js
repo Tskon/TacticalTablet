@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react'
-import app from './app'
+import App from './app'
 import Panel from './Panel';
 
 import light from '~/common/images/wot/light.png'
@@ -8,20 +8,19 @@ import heavy from '~/common/images/wot/heavy.png'
 import art from '~/common/images/wot/art.png'
 
 const icons = [light, medium, heavy, art, light, medium, heavy, art, light, medium, heavy, art]
-new Panel(app, icons, {
-  panelWidth: 300,
-  iconSize: 100,
-  gap: 10,
-  inRowCount: 3,
-})
 
 export default () => {
   const canvas = useRef()
 
   useEffect(() => {
-    canvas.current.appendChild(app.view)
+    canvas.current.appendChild(App.view)
   }, [])
 
-  return (<div ref={canvas}></div>)
+  return (
+    <div>
+      <div ref={canvas}></div>
+      <Panel icons={icons}></Panel>
+    </div>
+  )
 }
 
