@@ -1,10 +1,9 @@
 import React, {useEffect} from 'react'
+import PropTypes from 'prop-types'
 import jsCookie from 'js-cookie'
-
 import Pixi from '~/components/pixi'
 
-
-export default function Tablet({slug}) {
+function Tablet({slug}) {
   useEffect(() => {
     const cookies = jsCookie.get('tablets')
     const tabletsList = JSON.parse(cookies)
@@ -21,3 +20,9 @@ export default function Tablet({slug}) {
     </div>
   )
 }
+
+Tablet.propTypes = {
+  slug: PropTypes.string,
+}
+
+export default Tablet
