@@ -1,3 +1,10 @@
 .panel {
+  display: flex;
+  flex-wrap: wrap;
   min-width: $panel-width;
+}
+
+.button {
+  width: calc(30% - 12px);
+  height: auto;
 }

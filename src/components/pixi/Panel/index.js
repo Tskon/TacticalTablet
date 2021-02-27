@@ -12,6 +12,7 @@ const Panel = ({icons}) => {
     const createIcon = () => {iconFactory.add(icon, 100, 150, Math.random() * 0xffffff)}
     return (
       <button
+        className={styles.button}
         onClick={createIcon}
         key={i}
       >
@@ -21,7 +22,9 @@ const Panel = ({icons}) => {
   })
 
   return (
-    <div className={styles.panel}>{buttons}</div>
+    <div>
+      <div className={styles.panel}>{buttons}</div>
+    </div>
   )
 }
 
