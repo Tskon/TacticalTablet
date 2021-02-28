@@ -5,12 +5,8 @@ import Pixi from '~/components/pixi'
 
 function Tablet({slug}) {
   useEffect(() => {
-<<<<<<< HEAD
-    const tabletsList = cookies.get('tablets') ? JSON.parse(cookies.get('tablets')) : []
-=======
-    const cookies = jsCookie.get('tablets')
-    const tabletsList = JSON.parse(cookies)
->>>>>>> a5f14fbe4403a7232e3252c2f0916fe50722ddd6
+    const tablets = jsCookie.get('tablets')
+    const tabletsList = tablets ? JSON.parse(tablets) : []
     if (!tabletsList.includes(slug)) {
       tabletsList.push(slug)
     }
