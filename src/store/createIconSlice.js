@@ -4,11 +4,11 @@ const createIconSlice = createSlice({
   name: 'createIcon',
   initialState: {
     icon: null,
-    color: '#ccff99',
+    color: Math.random() * 0xffffff,
     size: 30,
   },
   reducers: {
-    setIcon: (state, payload) => {
+    setIcon: (state, {payload}) => {
       state.icon = payload
     }
   }
@@ -16,4 +16,4 @@ const createIconSlice = createSlice({
 
 export const {setIcon} = createIconSlice.actions
 
-export default createIconSlice
+export default createIconSlice.reducer

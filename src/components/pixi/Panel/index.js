@@ -1,19 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types'
+import {useDispatch} from 'react-redux'
+import {setIcon} from '~/store/createIconSlice';
 import styles from './Panel.scss'
-import IconFactory from '~/components/pixi/IconFactory';
-import App from '../app'
-
-const iconFactory = new IconFactory(App)
 
 const Panel = ({icons}) => {
+  const dispatch = useDispatch()
 
   const buttons = icons.map((icon, i) => {
-    const createIcon = () => {iconFactory.add(icon, 100, 150, Math.random() * 0xffffff)}
     return (
       <button
         className={styles.button}
-        onClick={createIcon}
+        onClick={() => {dispatch(setIcon(icon))}}
         key={i}
       >
         <img src={icon} alt="icon"/>
