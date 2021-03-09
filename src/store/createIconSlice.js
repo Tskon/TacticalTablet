@@ -1,4 +1,4 @@
-import {createSlice, configureStore} from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit';
 
 const createIconSlice = createSlice({
   name: 'createIcon',
@@ -14,9 +14,6 @@ const createIconSlice = createSlice({
   }
 })
 
-const store = configureStore({
-  reducer: createIconSlice.reducer
-})
-
 export const {setIcon} = createIconSlice.actions
-export default store
+
+export default createIconSlice
