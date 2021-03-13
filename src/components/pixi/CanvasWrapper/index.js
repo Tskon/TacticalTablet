@@ -13,7 +13,8 @@ export default () => {
   }, [])
 
   const {icon, size, color} = useSelector(state => state.createIcon)
-  const createIcon = () => {
+  const createIcon = (event) => {
+    console.log(event)
     iconFactory.add(icon, size, 100, 150, color)
   }
 
