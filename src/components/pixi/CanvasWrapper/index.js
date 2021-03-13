@@ -5,7 +5,7 @@ import App from '~/components/pixi/app'
 import IconFactory from '~/components/pixi/IconFactory';
 const iconFactory = new IconFactory(App)
 
-export default () => {
+export default function CanvasWrapper() {
   const canvas = useRef()
 
   useEffect(() => {
@@ -13,9 +13,8 @@ export default () => {
   }, [])
 
   const {icon, size, color} = useSelector(state => state.createIcon)
-  const createIcon = (event) => {
-    console.log(event)
-    iconFactory.add(icon, size, 100, 150, color)
+  const createIcon = ({nativeEvent}) => {
+    iconFactory.add(icon, size, nativeEvent.offsetX, nativeEvent.offsetY, color)
   }
 
   return (
