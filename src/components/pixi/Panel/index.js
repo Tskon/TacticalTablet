@@ -21,6 +21,11 @@ const Panel = ({icons}) => {
     )
   })
 
+  const imageStyles = {
+    width: `${size}px`,
+    height: `${size}px`,
+  }
+
   return (
     <div>
       <div className={styles.panel}>{buttons}</div>
@@ -47,9 +52,10 @@ const Panel = ({icons}) => {
           max="300"
           onInput={({target}) => {dispatch(setSize(target.value))}}
         />
+        { size } px
         <img
           src={icon}
-          style={{width: size, height: size}}
+          style={imageStyles}
           alt="Выбранная иконка"
         />
       </div>
