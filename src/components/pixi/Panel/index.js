@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import {useDispatch, useSelector} from 'react-redux'
-import {setIcon, setColor} from '~/store/createIconSlice';
+import {setIcon, setColor, setSize} from '~/store/createIconSlice';
 import styles from './Panel.scss'
 
 const Panel = ({icons}) => {
   const dispatch = useDispatch()
-  const {color} = useSelector(state => state.createIcon)
+  const {color, icon, size} = useSelector(state => state.createIcon)
   const hexColor = color.replace('0x', '#')
 
   const buttons = icons.map((icon, i) => {
@@ -38,6 +38,19 @@ const Panel = ({icons}) => {
           value={hexColor}
           type="color"
           onChange={({target}) => {dispatch(setColor(target.value))}}
+        />
+      </div>
+      <div className={styles.panel}>
+        <input
+          type="range"
+          min="10"
+          max="300"
+          onInput={({target}) => {dispatch(setSize(target.value))}}
+        />
+        <img
+          src={icon}
+          style={{width: size, height: size}}
+          alt="Выбранная иконка"
         />
       </div>
     </div>

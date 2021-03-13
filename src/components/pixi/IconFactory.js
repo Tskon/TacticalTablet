@@ -18,6 +18,8 @@ export default class IconFactory {
       .on('pointermove', this.onDragMove)
     icon.x = x
     icon.y = y
+    icon.width = size
+    icon.height = size
     if (color) icon.tint = color
 
     this.app.stage.addChild(icon)
