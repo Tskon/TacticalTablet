@@ -53,11 +53,13 @@ const Panel = ({icons}) => {
           onInput={({target}) => {dispatch(setSize(target.value))}}
         />
         { size } px
-        {icon && <img
-          src={icon}
-          style={imageStyles}
-          alt="Выбранная иконка"
-        />}
+        {icon &&
+          <img
+            src={icon}
+            style={imageStyles}
+            alt="Выбранная иконка"
+          />
+        }
       </div>
     </div>
   )
