@@ -6,17 +6,23 @@ import styles from './Panel.scss'
 
 const Panel = ({icons}) => {
   const dispatch = useDispatch()
-  const {color, icon, size} = useSelector(state => state.createIcon)
+  const {color, icon, iconIndex, size} = useSelector(state => state.createIcon)
   const hexColor = color.replace('0x', '#')
 
   const buttons = icons.map((icon, i) => {
+    const borderStyle = (iconIndex === i) ? `1px solid ${hexColor}` : 'none'
+
     return (
       <button
         className={styles.button}
-        onClick={() => {dispatch(setIcon(icon))}}
+        style={{
+          border: borderStyle
+        }}
+        onClick={() => {dispatch(setIcon({icon, iconIndex: i}))}}
         key={i}
       >
         <img src={icon} alt="icon"/>
+        {iconIndex} - {i}
       </button>
     )
   })

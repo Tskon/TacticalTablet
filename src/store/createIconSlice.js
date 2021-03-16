@@ -5,13 +5,15 @@ const createIconSlice = createSlice({
 
   initialState: {
     icon: null,
+    iconIndex: null,
     color: '0x009900',
     size: 50,
   },
 
   reducers: {
     setIcon: (state, {payload}) => {
-      state.icon = payload
+      state.icon = payload.icon
+      state.iconIndex = payload.iconIndex
     },
 
     setColor: (state, {payload}) => {
