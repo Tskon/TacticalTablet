@@ -22,7 +22,6 @@ const Panel = ({icons}) => {
         key={i}
       >
         <img src={icon} alt="icon"/>
-        {iconIndex} - {i}
       </button>
     )
   })
