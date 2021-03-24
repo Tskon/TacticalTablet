@@ -8,6 +8,7 @@ const createIconSlice = createSlice({
     iconIndex: null,
     color: '0x009900',
     size: 50,
+    addMode: false,
   },
 
   reducers: {
@@ -23,9 +24,13 @@ const createIconSlice = createSlice({
     setSize: (state, {payload}) => {
       state.size = payload
     },
+
+    setAddMode: (state, {payload}) => {
+      state.addMode = payload
+    }
   }
 })
 
-export const {setIcon, setColor, setSize} = createIconSlice.actions
+export const {setIcon, setColor, setSize, setAddMode} = createIconSlice.actions
 
 export default createIconSlice.reducer

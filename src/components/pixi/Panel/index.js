@@ -1,16 +1,16 @@
-import React from 'react';
+import React from 'react'
 import PropTypes from 'prop-types'
 import {useDispatch, useSelector} from 'react-redux'
-import {setIcon, setColor, setSize} from '~/store/createIconSlice';
+import {setIcon, setColor, setSize, setAddMode} from '~/store/createIconSlice'
 import styles from './Panel.scss'
 
 const Panel = ({icons}) => {
   const dispatch = useDispatch()
-  const {color, icon, iconIndex, size} = useSelector(state => state.createIcon)
+  const {color, icon, iconIndex, size, addMode} = useSelector(state => state.createIcon)
   const hexColor = color.replace('0x', '#')
 
   const buttons = icons.map((icon, i) => {
-    const borderStyle = (iconIndex === i) ? `1px solid ${hexColor}` : 'none'
+    const borderStyle = (addMode && iconIndex === i) ? `1px solid ${hexColor}` : 'none'
 
     return (
       <button
@@ -18,7 +18,10 @@ const Panel = ({icons}) => {
         style={{
           border: borderStyle
         }}
-        onClick={() => {dispatch(setIcon({icon, iconIndex: i}))}}
+        onClick={() => {
+          dispatch(setIcon({icon, iconIndex: i}))
+          dispatch(setAddMode(true))
+        }}
         key={i}
       >
         <img src={icon} alt="icon"/>
