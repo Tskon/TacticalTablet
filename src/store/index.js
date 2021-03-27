@@ -1,9 +1,11 @@
 import {configureStore} from '@reduxjs/toolkit'
-import createIcon from '~/store/createIconSlice';
+import createIcon from '~/store/createIconSlice'
+import tabletData from '~/store/tabletDataSlice'
 
 const store = configureStore({
   reducer: {
-    createIcon
+    createIcon,
+    tabletData,
   }
 })
 
