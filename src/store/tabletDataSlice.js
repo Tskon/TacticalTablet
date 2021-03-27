@@ -9,7 +9,15 @@ const tabletDataSlice = createSlice({
       x: 0,
       y: 0,
     }
+  },
+
+  reducers: {
+    setPointerCoords: (state, {payload: {x, y}}) => {
+      state.userPointer = {x, y}
+    }
   }
 })
+
+export const {setPointerCoords} = tabletDataSlice.actions
 
 export default tabletDataSlice.reducer

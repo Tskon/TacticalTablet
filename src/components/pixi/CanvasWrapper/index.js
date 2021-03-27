@@ -1,6 +1,8 @@
 import React, {useEffect, useRef} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
+import {throttle} from 'lodash'
 import {setAddMode} from '~/store/createIconSlice'
+import {setPointerCoords} from '~/store/tabletDataSlice'
 import styles from './CanvasWrapper.scss'
 import App from '~/components/pixi/app'
 import IconFactory from '~/components/pixi/IconFactory';
@@ -21,11 +23,16 @@ export default function CanvasWrapper() {
     dispatch(setAddMode(false))
   }
 
+  const setPoiterCoords = throttle(({nativeEvent: {offsetX: x, offsetY: y}}) => {
+    dispatch(setPointerCoords({x, y}))
+  }, 100)
+
   return (
     <div
       ref={canvas}
       className={styles.wrapper}
       onClick={createIcon}
+      onMouseMove={setPoiterCoords}
     ></div>
   )
 }
