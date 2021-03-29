@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {throttle} from 'lodash'
 import {setAddMode} from '~/store/createIconSlice'
-import {setPointerCoords} from '~/store/tabletDataSlice'
+import {setPointerCoords, setIconData} from '~/store/tabletDataSlice'
 import styles from './CanvasWrapper.scss'
 import App from '~/components/pixi/app'
 import IconFactory from '~/components/pixi/IconFactory';
@@ -19,7 +19,15 @@ export default function CanvasWrapper() {
   const {icon, size, color, addMode} = useSelector(state => state.createIcon)
   const createIcon = ({nativeEvent}) => {
     if (!addMode) return
-    iconFactory.add(icon, size, nativeEvent.offsetX, nativeEvent.offsetY, color)
+    const newIcon = {
+      img: icon,
+      size,
+      x: nativeEvent.offsetX,
+      y: nativeEvent.offsetY,
+      color,
+    }
+    const iconId = iconFactory.add(newIcon)
+    dispatch(setIconData({...newIcon, id: iconId}))
     dispatch(setAddMode(false))
   }
 

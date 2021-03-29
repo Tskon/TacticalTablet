@@ -7,7 +7,7 @@ export default class IconFactory {
     this.app = app
   }
 
-  add(img, size, x = 0, y = 0, color) {
+  add({img, size, x = 0, y = 0, color}) {
     const icon = sprite(img)
     icon.interactive = true
     icon.buttonMode = true
