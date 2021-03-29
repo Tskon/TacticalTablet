@@ -17,7 +17,12 @@ const tabletDataSlice = createSlice({
     },
 
     setIconData: (state, {payload}) => {
-      state.icons[payload.id] = payload
+      const icon = state.icons[payload.id]
+      if (icon) {
+        state.icons[payload.id] = {...icon, ...payload}
+      } else {
+        state.icons[payload.id] = payload
+      }
     }
   }
 })

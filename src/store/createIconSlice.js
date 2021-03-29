@@ -7,7 +7,7 @@ const createIconSlice = createSlice({
     icon: null,
     iconIndex: null,
     color: '0x009900',
-    size: 50,
+    size: 100,
     addMode: false,
   },
 

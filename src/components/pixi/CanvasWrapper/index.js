@@ -19,6 +19,7 @@ export default function CanvasWrapper() {
   const {icon, size, color, addMode} = useSelector(state => state.createIcon)
   const createIcon = ({nativeEvent}) => {
     if (!addMode) return
+
     const newIcon = {
       img: icon,
       size,
@@ -26,8 +27,19 @@ export default function CanvasWrapper() {
       y: nativeEvent.offsetY,
       color,
     }
-    const iconId = iconFactory.add(newIcon)
-    dispatch(setIconData({...newIcon, id: iconId}))
+
+    const onMoveCb = ({id, x, y}) => {
+      dispatch(setIconData({
+        id,
+        x: Math.round(x),
+        y: Math.round(y),
+      }))
+    }
+
+    const iconId = iconFactory.add(newIcon, throttle(onMoveCb, 100))
+    newIcon.id = iconId
+
+    dispatch(setIconData(newIcon))
     dispatch(setAddMode(false))
   }
 

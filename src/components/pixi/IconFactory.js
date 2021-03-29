@@ -7,7 +7,8 @@ export default class IconFactory {
     this.app = app
   }
 
-  add({img, size, x = 0, y = 0, color}) {
+  add({img, size, x = 0, y = 0, color}, onMoveCb) {
+    this.onMoveCb = onMoveCb
     const icon = sprite(img)
     icon.interactive = true
     icon.buttonMode = true
@@ -22,6 +23,7 @@ export default class IconFactory {
     icon.width = size
     icon.height = size
     icon.id = uuid()
+    icon.onMoveCb = onMoveCb
     if (color) icon.tint = color
 
     this.app.stage.addChild(icon)
@@ -34,17 +36,23 @@ export default class IconFactory {
     this.dragging = true
   }
   onDragEnd() {
+    if (this.onMoveCb) {
+      this.onMoveCb({x: this.position.x, y: this.position.y, id: this.id})
+    }
+
     this.alpha = 1
     this.dragging = false
     this.data = null
-    // TODO save coords from this.x / this.y
   }
   onDragMove() {
-    if (this.dragging) {
-      const newPosition = this.data.getLocalPosition(this.parent)
-      this.x = newPosition.x
-      this.y = newPosition.y
-      // TODO periodically save coords from newPosition.x / newPosition.y
+    if (!this.dragging) return
+
+    const newPosition = this.data.getLocalPosition(this.parent)
+    this.x = newPosition.x
+    this.y = newPosition.y
+
+    if (this.onMoveCb) {
+      this.onMoveCb({x: this.position.x, y: this.position.y, id: this.id})
     }
   }
 
