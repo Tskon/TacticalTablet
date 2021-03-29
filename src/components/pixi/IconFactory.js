@@ -1,5 +1,6 @@
 import {Sprite} from 'pixi.js'
 const sprite = Sprite.from
+import {v4 as uuid} from 'uuid'
 
 export default class IconFactory {
   constructor(app) {
@@ -20,9 +21,11 @@ export default class IconFactory {
     icon.y = y
     icon.width = size
     icon.height = size
+    icon.id = uuid()
     if (color) icon.tint = color
 
     this.app.stage.addChild(icon)
+    return icon.id
   }
 
   onDragStart(event) {
