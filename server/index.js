@@ -13,15 +13,15 @@ import api from './api/index.js'
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({path:path.resolve(__dirname, '../.env')})
 
-const UUID = require('uuid')
-
 const wss = new WebSocket.Server({port: 4321})
+
 wss.on('connection', (ws) => {
-  ws.id = UUID()
-  ws.on('message', (message) => {
-    ws.send(`[${ws.id}]: ${message}`)
-  })
-})
+  ws.on('message', function incoming(message) {
+    console.log('received: %s', message);
+  });
+
+  ws.send('something');
+});
 
 mongoose.Promise = global.Promise
 
