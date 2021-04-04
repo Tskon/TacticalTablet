@@ -11,6 +11,30 @@ function Tablet({slug}) {
       tabletsList.push(slug)
     }
     jsCookie.set('tablets', tabletsList, {expires: +process.env.EXPIRE_PERIOD})
+
+    const socket = new WebSocket('ws://127.0.0.1:4321')
+
+    socket.onopen = function() {
+      console.log('Соединение установлено.');
+      socket.send('hello mf!')
+    }
+
+    socket.onclose = function(event) {
+      if (event.wasClean) {
+        console.log('Соединение закрыто чисто');
+      } else {
+        console.log('Обрыв соединения'); // например, "убит" процесс сервера
+      }
+      console.log('Код: ' + event.code + ' причина: ' + event.reason);
+    }
+
+    socket.onmessage = function(event) {
+      console.log('Получены данные ' + event.data);
+    }
+
+    socket.onerror = function(error) {
+      console.log('Ошибка ' + error.message);
+    }
   }, [])
 
   return (
