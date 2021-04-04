@@ -1,6 +1,5 @@
 import cors from 'cors'
 import path from 'path'
-import WebSocket from 'ws'
 import express from 'express'
 import fileUpload from 'express-fileupload'
 import bodyParser from 'body-parser'
@@ -9,19 +8,11 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import {fileURLToPath} from 'url'
 import api from './api/index.js'
+import './ws.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({path:path.resolve(__dirname, '../.env')})
 
-const wss = new WebSocket.Server({port: 4321})
-
-wss.on('connection', (ws) => {
-  ws.on('message', function incoming(message) {
-    console.log('received: %s', message);
-  });
-
-  ws.send('something');
-});
 
 mongoose.Promise = global.Promise
 
