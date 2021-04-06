@@ -21,5 +21,9 @@ socket.onerror = (error) => {
   console.log('WS: Error - ' + error.message);
 }
 
+socket.sendString = (data) => {
+  socket.send(JSON.stringify(data))
+}
+
 
 export default socket
