@@ -15,7 +15,7 @@ const tabletDataSlice = createSlice({
   reducers: {
     setPointerCoords: (state, {payload: {x, y}}) => {
       state.userPointer = {x, y}
-      socket.send({
+      socket.sendString({
         pointer: {x, y}
       })
     },

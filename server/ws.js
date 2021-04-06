@@ -10,7 +10,7 @@ wss.on('connection', (ws) => {
     wss.clients.forEach((client) => {
       if (client.readyState === WebSocket.OPEN) {
         console.log(message)
-        client.sendString(message);
+        client.send(message);
       }
     });
   });
