@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
+import socket from '~/services/ws'
 
 const tabletDataSlice = createSlice({
   name: 'tabletData',
@@ -14,6 +15,9 @@ const tabletDataSlice = createSlice({
   reducers: {
     setPointerCoords: (state, {payload: {x, y}}) => {
       state.userPointer = {x, y}
+      socket.send({
+        pointer: {x, y}
+      })
     },
 
     setIconData: (state, {payload}) => {
