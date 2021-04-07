@@ -6,8 +6,8 @@ import '~/services/ws.js'
 
 function Tablet({slug}) {
   useEffect(() => {
-    const cookies = jsCookie.get('tablets')
-    const tabletsList = JSON.parse(cookies)
+    const tabletsList = jsCookie.get('tablets') ? JSON.parse(jsCookie.get('tablets')) : []
+
     if (!tabletsList.includes(slug)) {
       tabletsList.push(slug)
     }
