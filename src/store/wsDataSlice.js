@@ -1,19 +1,19 @@
 import {createSlice} from '@reduxjs/toolkit'
 
-const tabletDataSlice = createSlice({
+const wsDataSlice = createSlice({
   name: 'tabletData',
 
   initialState: {
-    pointer: {}
+    pointer: null,
   },
 
   reducers: {
-    setPointerCoords: (state, {payload: {x, y}}) => {
+    setAnotherPointerCoords: (state, {payload: {x, y}}) => {
       state.pointer = {x, y}
     },
   }
 })
 
-export const {setPointerCoords} = tabletDataSlice.actions
+export const {setAnotherPointerCoords} = wsDataSlice.actions
 
-export default tabletDataSlice.reducer
+export default wsDataSlice.reducer

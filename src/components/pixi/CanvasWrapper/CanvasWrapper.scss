@@ -1,3 +1,17 @@
 .wrapper {
+  position: relative;
+
+}
+
+.canvas {
   width: calc(100% - #{$panel-width});
+}
+
+.cursor {
+  background-color: red;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  pointer-events: none;
+  //transition: 50ms;
 }

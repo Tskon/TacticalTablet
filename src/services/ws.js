@@ -1,4 +1,4 @@
-import {setPointerCoords} from '~/store/wsDataSlice'
+import {setAnotherPointerCoords} from '~/store/wsDataSlice'
 
 const socket = new WebSocket('ws://127.0.0.1:4321')
 
@@ -19,7 +19,7 @@ socket.onmessage = (event) => {
   console.log('WS: Data received - ' + event.data)
   const data = JSON.parse(event.data)
   if (data.pointer) {
-    // $store.dispatch(setPointerCoords(data.pointer))
+    $store.dispatch(setAnotherPointerCoords(data.pointer))
   }
 }
 

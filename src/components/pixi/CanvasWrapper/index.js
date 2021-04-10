@@ -17,6 +17,7 @@ export default function CanvasWrapper() {
   }, [])
 
   const {icon, size, color, addMode} = useSelector(state => state.createIcon)
+  const {pointer} = useSelector(state => state.wsData)
   const createIcon = ({nativeEvent}) => {
     if (!addMode) return
 
@@ -47,14 +48,21 @@ export default function CanvasWrapper() {
     dispatch(setPointerCoords({x, y}))
   }, 100)
 
+  const cursorImg = <div className={styles.cursor} style={{
+    top: pointer ? pointer.y : 0,
+    left: pointer ? pointer.x : 0,
+  }}></div>
+
   return (
-    <div
-      ref={canvas}
-      className={styles.wrapper}
-      onClick={createIcon}
-      onMouseMove={setPoiterCoords}
-    >
-      <div style={{backgroundColor: 'red', width: '50px', height: '50px'}}></div>
+    <div className={styles.wrapper}>
+      <div
+        ref={canvas}
+        className={styles.canvas}
+        onClick={createIcon}
+        onMouseMove={setPoiterCoords}
+      >
+      </div>
+      { pointer && cursorImg }
     </div>
   )
 }
