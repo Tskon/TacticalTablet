@@ -37,7 +37,7 @@ export default function CanvasWrapper() {
       }))
     }
 
-    const iconId = iconFactory.add(newIcon, throttle(onMoveCb, 100))
+    const iconId = iconFactory.add(newIcon, throttle(onMoveCb, 1000 / 60))
     newIcon.id = iconId
 
     dispatch(setIconData(newIcon))

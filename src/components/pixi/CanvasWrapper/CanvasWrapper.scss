@@ -13,5 +13,6 @@
   height: 15px;
   position: absolute;
   pointer-events: none;
-  //transition: 50ms;
+  transition-duration: 100ms;
+  transition-property: top, left;
 }
