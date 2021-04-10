@@ -53,6 +53,8 @@ export default function CanvasWrapper() {
       className={styles.wrapper}
       onClick={createIcon}
       onMouseMove={setPoiterCoords}
-    ></div>
+    >
+      <div style={{backgroundColor: 'red', width: '50px', height: '50px'}}></div>
+    </div>
   )
 }

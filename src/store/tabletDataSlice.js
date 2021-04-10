@@ -9,7 +9,7 @@ const tabletDataSlice = createSlice({
     userPointer: {
       x: 0,
       y: 0,
-    }
+    },
   },
 
   reducers: {
