@@ -6,6 +6,8 @@ import {setPointerCoords, setIconData} from '~/store/tabletDataSlice'
 import styles from './CanvasWrapper.scss'
 import App from '~/components/pixi/app'
 import IconFactory from '~/components/pixi/IconFactory';
+import Cursor from '~/common/images/cursor.svg'
+
 const iconFactory = new IconFactory(App)
 
 export default function CanvasWrapper() {
@@ -48,18 +50,24 @@ export default function CanvasWrapper() {
     dispatch(setPointerCoords({x, y}))
   }, 100)
 
-  const cursorImg = <div className={styles.cursor} style={{
-    top: pointer ? pointer.y : 0,
-    left: pointer ? pointer.x : 0,
-  }}></div>
+  const cursorImg = <img
+    src={Cursor}
+    className={styles.cursor}
+    style={{
+      top: pointer ? pointer.y : 0,
+      left: pointer ? pointer.x : 0,
+    }}
+  ></img>
 
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={styles.wrapper}
+      onClick={createIcon}
+      onMouseMove={setPoiterCoords}
+    >
       <div
         ref={canvas}
         className={styles.canvas}
-        onClick={createIcon}
-        onMouseMove={setPoiterCoords}
       >
       </div>
       { pointer && cursorImg }
