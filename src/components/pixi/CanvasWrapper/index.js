@@ -6,6 +6,8 @@ import {setPointerCoords, setIconData} from '~/store/tabletDataSlice'
 import styles from './CanvasWrapper.scss'
 import App from '~/components/pixi/app'
 import IconFactory from '~/components/pixi/IconFactory';
+import Cursor from '~/common/images/cursor.svg'
+
 const iconFactory = new IconFactory(App)
 
 export default function CanvasWrapper() {
@@ -17,6 +19,7 @@ export default function CanvasWrapper() {
   }, [])
 
   const {icon, size, color, addMode} = useSelector(state => state.createIcon)
+  const {pointer} = useSelector(state => state.wsData)
   const createIcon = ({nativeEvent}) => {
     if (!addMode) return
 
@@ -36,7 +39,7 @@ export default function CanvasWrapper() {
       }))
     }
 
-    const iconId = iconFactory.add(newIcon, throttle(onMoveCb, 100))
+    const iconId = iconFactory.add(newIcon, throttle(onMoveCb, 1000 / 60))
     newIcon.id = iconId
 
     dispatch(setIconData(newIcon))
@@ -47,12 +50,27 @@ export default function CanvasWrapper() {
     dispatch(setPointerCoords({x, y}))
   }, 100)
 
+  const cursorImg = <img
+    src={Cursor}
+    className={styles.cursor}
+    style={{
+      top: pointer ? pointer.y : 0,
+      left: pointer ? pointer.x : 0,
+    }}
+  ></img>
+
   return (
     <div
-      ref={canvas}
       className={styles.wrapper}
       onClick={createIcon}
       onMouseMove={setPoiterCoords}
-    ></div>
+    >
+      <div
+        ref={canvas}
+        className={styles.canvas}
+      >
+      </div>
+      { pointer && cursorImg }
+    </div>
   )
 }

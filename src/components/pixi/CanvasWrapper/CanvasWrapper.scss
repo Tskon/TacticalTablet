@@ -1,3 +1,16 @@
 .wrapper {
+  position: relative;
+}
+
+.canvas {
   width: calc(100% - #{$panel-width});
+}
+
+.cursor {
+  width: 13px;
+  height: 20px;
+  position: absolute;
+  pointer-events: none;
+  transition-duration: 100ms;
+  transition-property: top, left;
 }
