@@ -3,10 +3,13 @@ import Tablet from '../dbModels/Tablet.js'
 
 export default {
   async create(req, res) {
-    await Tablet.create({
+    const tabletData = await Tablet.create({
       editId: `edit-${uuid()}`,
       viewId: `view-${uuid()}`,
     })
-    res.send({status: 'ok'})
+
+    const {editId} = tabletData._doc
+
+    res.send({editId, status: 'ok'})
   },
 }
