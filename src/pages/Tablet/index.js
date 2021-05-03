@@ -2,7 +2,8 @@ import React, {useEffect} from 'react'
 import PropTypes from 'prop-types'
 import jsCookie from 'js-cookie'
 import Pixi from '~/components/pixi'
-import '~/services/ws.js'
+import axios from 'axios'
+import {connectToWebsocket} from '~/services/ws.js'
 
 function Tablet({slug}) {
   useEffect(() => {
@@ -13,6 +14,12 @@ function Tablet({slug}) {
       tabletsList.push(slug)
     }
     jsCookie.set('tablets', tabletsList, {expires: +process.env.EXPIRE_PERIOD})
+    console.log(slug)
+    axios.get('http://localhost:9988/api/createWs', {
+      params: {
+        tabletId: slug
+      }
+    }).then(connectToWebsocket(slug))
   }, [])
 
   return (

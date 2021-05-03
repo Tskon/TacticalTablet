@@ -8,7 +8,7 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import {fileURLToPath} from 'url'
 import api from './api/index.js'
-import './ws.js'
+import createWebsocketServer from './ws.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({path:path.resolve(__dirname, '../.env')})

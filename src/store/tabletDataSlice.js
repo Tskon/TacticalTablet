@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-import socket from '~/services/ws'
+import {socket} from '~/services/ws'
 
 const tabletDataSlice = createSlice({
   name: 'tabletData',

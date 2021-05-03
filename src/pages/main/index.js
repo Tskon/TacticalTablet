@@ -7,7 +7,7 @@ export default function Main() {
 
   async function onCreateTablet() {
     const {status, editId} = await createTablet()
-    if (status === 'ok') return history.push(`tablet/${editId}`)
+    if (status === 'ok') return history.push(`/tablet/${editId}`)
   }
 
 
