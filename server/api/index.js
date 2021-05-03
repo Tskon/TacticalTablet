@@ -8,7 +8,7 @@ router.post('/tablet', tablet.create)
 
 router.get('/createWs', (req, res) => {
   createWebsocketServer(req.query.tabletId)
-  res.send('Hello')
+  res.send({status: 'ok'})
 });
 
 export default router

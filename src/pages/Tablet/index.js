@@ -14,7 +14,6 @@ function Tablet({slug}) {
       tabletsList.push(slug)
     }
     jsCookie.set('tablets', tabletsList, {expires: +process.env.EXPIRE_PERIOD})
-    console.log(slug)
     axios.get('http://localhost:9988/api/createWs', {
       params: {
         tabletId: slug

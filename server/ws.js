@@ -4,7 +4,6 @@ const serversList = {}
 
 function createWebsocketServer(wsId) {
   if (wsId in serversList) return
-  console.log('HOY: ', wsId)
 
   serversList[wsId] = new WebSocket.Server({port: 4321, path: `/${wsId}`})
   serversList[wsId].on('connection', (ws, req) => {
