@@ -7,7 +7,6 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
 module.exports = function (env, argv) {
   const watchMode = argv.liveReload || false
-  const modeEnv = argv.mode || 'development'
   const appEnv = dotenv.config().parsed
 
   const envKeys = {
