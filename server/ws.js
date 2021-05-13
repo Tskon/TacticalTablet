@@ -1,16 +1,26 @@
 import WebSocket from 'ws'
 
-const wss = new WebSocket.Server({port: 4321})
+const serversList = {}
 
-wss.on('connection', (ws) => {
-  console.log('WS: connected')
-  ws.on('message', function incoming(message) {
-    console.log('received: %s', message);
+function createWebSocketServer(wsId) {
+  if (wsId in serversList) return
 
-    wss.clients.forEach((client) => {
-      if (client !== ws && client.readyState === WebSocket.OPEN) {
-        client.send(message);
-      }
+  serversList[wsId] = new WebSocket.Server({port: 4321, path: `/${wsId}`})
+  serversList[wsId].on('connection', (ws, req) => {
+    console.log('REQUEST URL:', req.url)
+    console.log('WS: connected')
+    ws.on('message', function incoming(message) {
+      console.log('received: %s', message)
+
+      serversList[wsId].clients.forEach((client) => {
+        if (client !== ws && client.readyState === WebSocket.OPEN) {
+          client.send(message)
+        }
+      })
     })
   })
-})
+
+  console.log(serversList)
+}
+
+export default createWebSocketServer
