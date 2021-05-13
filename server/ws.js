@@ -2,7 +2,7 @@ import WebSocket from 'ws'
 
 const serversList = {}
 
-function createWebsocketServer(wsId) {
+function createWebSocketServer(wsId) {
   if (wsId in serversList) return
 
   serversList[wsId] = new WebSocket.Server({port: 4321, path: `/${wsId}`})
@@ -23,4 +23,4 @@ function createWebsocketServer(wsId) {
   console.log(serversList)
 }
 
-export default createWebsocketServer
+export default createWebSocketServer

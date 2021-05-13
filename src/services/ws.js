@@ -1,7 +1,7 @@
 import {setAnotherPointerCoords} from '~/store/wsDataSlice'
 let socket = null
 
-function connectToWebsocket(tabletId) {
+function connectToWebSocket(tabletId) {
   socket = new WebSocket(`ws://127.0.0.1:4321/${tabletId}`)
 
   socket.onopen = () => {
@@ -35,4 +35,4 @@ function connectToWebsocket(tabletId) {
 }
 
 
-export {connectToWebsocket, socket}
+export {connectToWebSocket, socket}

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import jsCookie from 'js-cookie'
 import Pixi from '~/components/pixi'
 import axios from 'axios'
-import {connectToWebsocket} from '~/services/ws.js'
+import {connectToWebSocket} from '~/services/ws.js'
 
 function Tablet({slug}) {
   useEffect(() => {
@@ -18,7 +18,7 @@ function Tablet({slug}) {
       params: {
         tabletId: slug
       }
-    }).then(connectToWebsocket(slug))
+    }).then(connectToWebSocket(slug))
   }, [])
 
   return (
