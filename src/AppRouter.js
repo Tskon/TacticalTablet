@@ -6,6 +6,7 @@ import {
   useParams,
 } from 'react-router-dom'
 
+import DefaultTemplate from '~/templates/DefaultTemplate'
 import Main from '~/pages/Main'
 import Tablet from '~/pages/Tablet'
 
@@ -17,14 +18,16 @@ function TabletChild() {
 export default function AppRouter() {
   return (
     <Router>
-      <Switch>
-        <Route path="/tablet/:slug">
-          <TabletChild/>
-        </Route>
-        <Route path="/">
-          <Main/>
-        </Route>
-      </Switch>
+      <DefaultTemplate>
+        <Switch>
+          <Route path="/tablet/:slug">
+            <TabletChild/>
+          </Route>
+          <Route path="/">
+            <Main/>
+          </Route>
+        </Switch>
+      </DefaultTemplate>
     </Router>
   )
 }
