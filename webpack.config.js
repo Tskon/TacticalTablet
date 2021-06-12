@@ -44,6 +44,10 @@ module.exports = function (env, argv) {
       open: false,
       historyApiFallback: true,
       liveReload: true,
+      before: function (app, server) {
+        const {host, port} = server.options
+        console.log('\x1b[42m', '\n', '---------------', '\n', `dev-url: http://${host}:${port}`, '\n', '---------------' , '\x1b[0m')
+      },
     },
     resolve: {
       extensions: ['.js', '.jsx'],
