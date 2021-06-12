@@ -21,7 +21,6 @@ mongoose.connect(process.env.MONGO_URL, {
 })
   .then(() => {console.log('connection successful')})
   .catch((err) => {
-    // TODO didnt work connection to db =(
     console.log(`connection url: ${process.env.MONGO_URL}`)
     console.log(err)
   })
@@ -40,7 +39,7 @@ app
     res.sendFile(path.resolve(__dirname, '../dist/index.html'))
   })
 
-const PORT = process.env.PORT || 9978
+const PORT = process.env.SERVER_PORT || 9978
 app.listen(PORT, (err) => {
   if (err) throw err
   console.log(`ready at http://localhost:${PORT}`)
