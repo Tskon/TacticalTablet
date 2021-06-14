@@ -16,7 +16,7 @@ export default {
   async get(req, res) {
     const {id} = req.query
     if (!id) {
-      return res.send({status: 'error', message: 'id required'})
+      return res.status(400).send({message: 'id required'})
     }
 
     const isEditId = /^edit-/.test(id)
@@ -27,6 +27,10 @@ export default {
     }
     const findedTablet = await Tablet.findOne(filter).select(selectFields)
 
-    res.send({status: 'ok', data: findedTablet})
+    if (!findedTablet) {
+      return res.status(400).send({message: 'incorrect id'})
+    }
+
+    res.send(findedTablet)
   }
 }
