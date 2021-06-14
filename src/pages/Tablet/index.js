@@ -1,25 +1,32 @@
 import React, {useEffect} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
 import PropTypes from 'prop-types'
-import jsCookie from 'js-cookie'
-import Pixi from '~/components/pixi'
 import axios from 'axios'
+import Pixi from '~/components/pixi'
+import jsCookie from 'js-cookie'
 import {connectToWebSocket} from '~/services/ws.js'
+import {fetchListFromCookie} from '~/store/tabletListSlice'
 
 function Tablet({slug}) {
-  useEffect(() => {
-    const tabletsCookie = jsCookie.get('tablets')
-    const tabletsList = tabletsCookie ? JSON.parse(tabletsCookie) : []
+  const dispatch = useDispatch()
+  const {list: tabletList} = useSelector(state => state.tabletList)
 
-    if (!tabletsList.includes(slug)) {
-      tabletsList.push(slug)
-    }
-    jsCookie.set('tablets', tabletsList, {expires: +process.env.EXPIRE_PERIOD})
+  useEffect(() => {
     axios.get('http://localhost:9988/api/createWs', {
       params: {
         tabletId: slug
       }
     }).then(connectToWebSocket(slug))
   }, [])
+
+  useEffect(() => {
+    if (!tabletList) {
+      dispatch(fetchListFromCookie())
+      return
+    }
+    const resultList = tabletList.includes(slug) ? tabletList : [...tabletList, slug]
+    jsCookie.set('tablets', resultList, {expires: +process.env.EXPIRE_PERIOD})
+  }, [tabletList])
 
   return (
     <div>

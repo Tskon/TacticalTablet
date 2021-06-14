@@ -19,10 +19,16 @@ export default function Main() {
     dispatch(fetchListFromCookie())
   }, [])
 
-  const tablets = list.map(id => <Link
-    key={id}
-    to={`/tablet/${id}`}
-  >{id}</Link>)
+  const tablets = list
+    ? list.map(id => (
+      <Link
+        key={id}
+        to={`/tablet/${id}`}
+      >
+        {id}
+      </Link>
+    ))
+    : []
 
   return (
     <div>

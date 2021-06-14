@@ -5,15 +5,13 @@ const tabletDataSlice = createSlice({
   name: 'tabletList',
 
   initialState: {
-    list: []
+    list: null
   },
 
   reducers: {
     fetchListFromCookie: (state) => {
       const tabletsCookie = jsCookie.get('tablets')
-      if (tabletsCookie) {
-        state.list = JSON.parse(tabletsCookie)
-      }
+      state.list = tabletsCookie ? JSON.parse(tabletsCookie) : []
     },
   }
 })
