@@ -12,7 +12,7 @@ function Tablet({slug}) {
   const {list: tabletList} = useSelector(state => state.tabletList)
 
   useEffect(() => {
-    axios.get('http://localhost:9988/api/createWs', {
+    axios.get( `${process.env.API_URL}/createWs`, {
       params: {
         tabletId: slug
       }
