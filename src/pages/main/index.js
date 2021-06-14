@@ -1,9 +1,11 @@
 import React, {useEffect} from 'react'
+import {useDispatch} from 'react-redux'
 import {useHistory, Link} from 'react-router-dom'
 import createTablet from '~/common/js/createTablet'
-import jsCookie from 'js-cookie';
+import {fetchListFromCookie} from '~/store/TabletListSlice'
 
 export default function Main() {
+  const dispatch = useDispatch()
   const history = useHistory()
 
   async function onCreateTablet() {
@@ -14,10 +16,7 @@ export default function Main() {
   let tabletsList = []
 
   useEffect(() => {
-    const tabletsCookie = jsCookie.get('tablets')
-    if (tabletsCookie) {
-      tabletsList = JSON.parse(tabletsCookie)
-    }
+    dispatch(fetchListFromCookie())
   }, [])
 
   const tablets = tabletsList.map(id => <Link to={`/tablet/${id}`}/>)
