@@ -17,6 +17,8 @@ function Tablet({slug}) {
         tabletId: slug
       }
     }).then(connectToWebSocket(slug))
+
+    axios.get(`${process.env.API_URL}/tablet?id=${slug}`)
   }, [])
 
   useEffect(() => {

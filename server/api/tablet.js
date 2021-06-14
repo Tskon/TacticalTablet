@@ -1,4 +1,4 @@
-import { v4 as uuid} from 'uuid'
+import {v4 as uuid} from 'uuid'
 import Tablet from '../dbModels/Tablet.js'
 
 export default {
@@ -12,4 +12,21 @@ export default {
 
     res.send({editId, status: 'ok'})
   },
+
+  async get(req, res) {
+    const {id} = req.query
+    if (!id) {
+      return res.send({status: 'error', message: 'id required'})
+    }
+
+    const isEditId = /^edit-/.test(id)
+    const filter = isEditId ? {editId: id} : {viewId: id}
+    const selectFields = {viewId: 1, _id: 0}
+    if (isEditId) {
+      selectFields.editId = 1
+    }
+    const findedTablet = await Tablet.findOne(filter).select(selectFields)
+
+    res.send({status: 'ok', data: findedTablet})
+  }
 }
