@@ -34,5 +34,9 @@ function connectToWebSocket(tabletId) {
   }
 }
 
+const iconActions = {
+  create: 'create',
+  update: 'update'
+}
 
-export {connectToWebSocket, socket}
+export {connectToWebSocket, socket, iconActions}

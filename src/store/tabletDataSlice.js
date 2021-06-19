@@ -1,5 +1,13 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {socket} from '~/services/ws'
+import {socket, iconActions} from '~/services/ws'
+
+function sendIconData(payload) {
+  const type = payload.image ? iconActions.create : iconActions.update
+  socket.sendString({
+    type,
+    payload,
+  })
+}
 
 const tabletDataSlice = createSlice({
   name: 'tabletData',
@@ -21,6 +29,7 @@ const tabletDataSlice = createSlice({
     },
 
     setIconData: (state, {payload}) => {
+      sendIconData(payload)
       const icon = state.icons[payload.id]
       if (icon) {
         state.icons[payload.id] = {...icon, ...payload}
