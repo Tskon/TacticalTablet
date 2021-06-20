@@ -11,8 +11,6 @@ function createWebSocketServer(wsId) {
     console.log('REQUEST URL:', req.url)
     console.log('WS: connected')
     ws.on('message', function incoming(message) {
-      console.log('received: %s', message)
-
       serversList[wsId].clients.forEach((client) => {
         if (client !== ws && client.readyState === WebSocket.OPEN) {
           client.send(message)
