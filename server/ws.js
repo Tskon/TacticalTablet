@@ -1,4 +1,5 @@
 import WebSocket from 'ws'
+import {iconHandler} from './wsEntities/icon.js'
 
 const serversList = {}
 
@@ -17,10 +18,17 @@ function createWebSocketServer(wsId) {
           client.send(message)
         }
       })
+
+      try {
+        const data = JSON.parse(message)
+        if (data.icon) {
+          iconHandler(data.icon)
+        }
+      } catch {
+        console.log('ws message have incorrect format (json required)')
+      }
     })
   })
-
-  console.log(serversList)
 }
 
 export default createWebSocketServer
