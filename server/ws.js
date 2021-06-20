@@ -20,7 +20,7 @@ function createWebSocketServer(wsId) {
       try {
         const data = JSON.parse(message)
         if (data.icon) {
-          iconHandler(data.icon)
+          iconHandler(data.icon, wsId)
         }
       } catch {
         console.log('ws message have incorrect format (json required)')

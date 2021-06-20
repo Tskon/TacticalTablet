@@ -15,16 +15,13 @@ function Tablet({slug}) {
   const [tabletIds, setTabletIds] = useState({})
 
   useEffect(async () => {
-    axios.get( `${process.env.API_URL}/createWs`, {
-      params: {
-        tabletId: slug
-      }
-    }).then(connectToWebSocket(slug))
-
     const {data, status} = await axios.get(`${process.env.API_URL}/tablet?id=${slug}`)
 
     if (status === 200) {
       setTabletIds(data)
+      axios
+        .get( `${process.env.API_URL}/createWs`, {params: {tabletId: data.viewId}})
+        .then(connectToWebSocket(data.viewId))
     }
   }, [])
 
