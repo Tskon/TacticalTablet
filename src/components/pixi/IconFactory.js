@@ -7,7 +7,7 @@ export default class IconFactory {
     this.app = app
   }
 
-  add({img, size, x = 0, y = 0, color}, onMoveCb) {
+  add({img, size, x = 0, y = 0, color, id}, onMoveCb) {
     this.onMoveCb = onMoveCb
     const icon = sprite(img)
     icon.interactive = true
@@ -22,8 +22,8 @@ export default class IconFactory {
     icon.y = y
     icon.width = size
     icon.height = size
-    icon.id = uuid()
     icon.onMoveCb = onMoveCb
+    icon.id = id || uuid()
     if (color) icon.tint = color
 
     this.app.stage.addChild(icon)
