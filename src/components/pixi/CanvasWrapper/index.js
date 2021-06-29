@@ -31,6 +31,7 @@ export default function CanvasWrapper() {
   const {icons} = useSelector(state => state.tabletData)
 
   useEffect(() => {
+    // TODO двигать объекты, а не добавлять
     Object.values(icons).forEach(item => {
       iconFactory.add(item, throttle(onMoveCb, 1000 / 60))
     })
