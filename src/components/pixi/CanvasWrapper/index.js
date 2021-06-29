@@ -31,9 +31,19 @@ export default function CanvasWrapper() {
   const {icons} = useSelector(state => state.tabletData)
 
   useEffect(() => {
-    // TODO двигать объекты, а не добавлять
+    const renderedIconList = App.stage.children
+
     Object.values(icons).forEach(item => {
-      iconFactory.add(item, throttle(onMoveCb, 1000 / 60))
+      const renderedIcon = renderedIconList.find(({id}) => id === item.id)
+
+      if (renderedIcon) {
+        Object.keys(item).forEach(key => {
+          if (key === 'color') return renderedIcon.tint = item[key]
+          renderedIcon[key] = item[key]
+        })
+      } else {
+        iconFactory.add(item, throttle(onMoveCb, 1000 / 60))
+      }
     })
   }, [icons])
 
