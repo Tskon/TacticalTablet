@@ -14,12 +14,28 @@ export default function CanvasWrapper() {
   const dispatch = useDispatch()
   const canvas = useRef()
 
+  const onMoveCb = ({id, x, y}) => {
+    dispatch(setIconData({
+      id,
+      x: Math.round(x),
+      y: Math.round(y),
+    }))
+  }
+
   useEffect(() => {
     canvas.current.appendChild(App.view)
   }, [])
 
   const {icon, size, color, addMode} = useSelector(state => state.createIcon)
   const {pointer} = useSelector(state => state.wsData)
+  const {icons} = useSelector(state => state.tabletData)
+
+  useEffect(() => {
+    Object.values(icons).forEach(item => {
+      iconFactory.add(item, throttle(onMoveCb, 1000 / 60))
+    })
+  }, [icons])
+
   const createIcon = ({nativeEvent}) => {
     if (!addMode) return
 
@@ -29,14 +45,6 @@ export default function CanvasWrapper() {
       x: nativeEvent.offsetX,
       y: nativeEvent.offsetY,
       color,
-    }
-
-    const onMoveCb = ({id, x, y}) => {
-      dispatch(setIconData({
-        id,
-        x: Math.round(x),
-        y: Math.round(y),
-      }))
     }
 
     const iconId = iconFactory.add(newIcon, throttle(onMoveCb, 1000 / 60))
