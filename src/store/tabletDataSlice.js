@@ -3,6 +3,7 @@ import {socket, iconActions} from '~/services/ws'
 
 function sendIconData(payload) {
   const type = payload.img ? iconActions.create : iconActions.update
+  if (!socket) return
   socket.sendString({
     icon: {
       type,

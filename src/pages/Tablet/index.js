@@ -7,6 +7,7 @@ import jsCookie from 'js-cookie'
 import {connectToWebSocket} from '~/services/ws'
 import copyToClipboard from '~/services/copyToClipboard'
 import {fetchListFromCookie} from '~/store/tabletListSlice'
+import {setIconData} from '~/store/tabletDataSlice'
 
 function Tablet({slug}) {
   const dispatch = useDispatch()
@@ -18,10 +19,20 @@ function Tablet({slug}) {
     const {data, status} = await axios.get(`${process.env.API_URL}/tablet?id=${slug}`)
 
     if (status === 200) {
-      setTabletIds(data)
+      const {icons, editId, viewId} = data
+
+      setTabletIds({editId, viewId})
+
+      if (icons && icons.length) {
+        icons.forEach(icon => {
+          console.log(Math.random())
+          dispatch(setIconData(icon))
+        })
+      }
+
       axios
-        .get( `${process.env.API_URL}/createWs`, {params: {tabletId: data.viewId}})
-        .then(connectToWebSocket(data.viewId))
+        .get( `${process.env.API_URL}/createWs`, {params: {tabletId: viewId}})
+        .then(connectToWebSocket(viewId))
     }
   }, [])
 
