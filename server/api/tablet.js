@@ -21,7 +21,11 @@ export default {
 
     const isEditId = /^edit-/.test(id)
     const filter = isEditId ? {editId: id} : {viewId: id}
-    const selectFields = {viewId: 1, _id: 0}
+    const selectFields = {
+      viewId: 1,
+      icons: 1,
+      _id: 0,
+    }
     if (isEditId) {
       selectFields.editId = 1
     }

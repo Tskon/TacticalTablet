@@ -6,6 +6,7 @@ const TabletSchema = new Schema({
   editId: String,
   viewId: String,
   icons: [{
+    _id: false,
     id: String,
     img: String,
     color: String,
