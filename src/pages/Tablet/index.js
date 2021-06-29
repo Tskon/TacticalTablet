@@ -25,7 +25,6 @@ function Tablet({slug}) {
 
       if (icons && icons.length) {
         icons.forEach(icon => {
-          console.log(Math.random())
           dispatch(setIconData(icon))
         })
       }
