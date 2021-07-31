@@ -5,7 +5,7 @@ import {setAddMode} from '~/store/createIconSlice'
 import {setPointerCoords, setIconData} from '~/store/tabletDataSlice'
 import styles from './CanvasWrapper.scss'
 import App from '~/components/pixi/app'
-import IconFactory from '~/components/pixi/IconFactory';
+import IconFactory from '~/services/IconFactory';
 import Cursor from '~/common/images/cursor.svg'
 
 const iconFactory = new IconFactory(App)
