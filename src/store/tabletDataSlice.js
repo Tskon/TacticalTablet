@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {socket, iconActions} from '~/services/ws'
+import {socket, iconActions} from '~/services/clientWS'
 
 function sendIconData(payload) {
   const type = payload.img ? iconActions.create : iconActions.update
