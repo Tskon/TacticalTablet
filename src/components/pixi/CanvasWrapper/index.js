@@ -4,11 +4,11 @@ import {throttle} from 'lodash'
 import {setAddMode} from '~/store/createIconSlice'
 import {setPointerCoords, setIconData} from '~/store/tabletDataSlice'
 import styles from './CanvasWrapper.scss'
-import App from '~/components/pixi/app'
+import pixiApp from '~/services/pixiApp'
 import IconFactory from '~/services/IconFactory';
 import Cursor from '~/common/images/cursor.svg'
 
-const iconFactory = new IconFactory(App)
+const iconFactory = new IconFactory(pixiApp)
 
 export default function CanvasWrapper() {
   const dispatch = useDispatch()
@@ -23,7 +23,7 @@ export default function CanvasWrapper() {
   }
 
   useEffect(() => {
-    canvas.current.appendChild(App.view)
+    canvas.current.appendChild(pixiApp.view)
   }, [])
 
   const {icon, size, color, addMode} = useSelector(state => state.createIcon)
@@ -31,7 +31,7 @@ export default function CanvasWrapper() {
   const {icons} = useSelector(state => state.tabletData)
 
   useEffect(() => {
-    const renderedIconList = App.stage.children
+    const renderedIconList = pixiApp.stage.children
 
     Object.values(icons).forEach(item => {
       const renderedIcon = renderedIconList.find(({id}) => id === item.id)
