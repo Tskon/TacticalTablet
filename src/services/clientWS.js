@@ -1,8 +1,18 @@
 import {setAnotherPointerCoords} from '~/store/wsDataSlice'
 
-const webSocket = {
-  socket: null,
-  id: null,
+class ClientWebSocket {
+  constructor() {
+    this.socket = null
+    this.id = null
+
+    this.initWebSocket = this.initWebSocket.bind(this)
+    this.onOpen = this.onOpen.bind(this)
+    this.onClose = this.onClose.bind(this)
+    this.onError = this.onError.bind(this)
+    this.onMessage = this.onMessage.bind(this)
+    this.waitForConnection = this.waitForConnection.bind(this)
+    this.send = this.send.bind(this)
+  }
 
   initWebSocket(id) {
     if (id) this.id = id
@@ -11,9 +21,9 @@ const webSocket = {
     this.socket.onerror = this.onError
     this.socket.onclose = this.onClose
     this.socket.onmessage = this.onMessage
-  },
+  }
 
-  onOpen() { console.log(`WS: Connection success, id: ${this.id}`) },
+  onOpen() { console.log(`WS: Connection success, id: ${this.id}`) }
   onClose(event) {
     if (event.wasClean) {
       console.log('WS: Connection closed clear')
@@ -22,15 +32,15 @@ const webSocket = {
       this.initWebSocket()
     }
     console.log('WS: Code - ' + event.code + ' reason - ' + event.reason)
-  },
-  onError(error) { console.log('WS: Error - ' + error.message) },
+  }
+  onError(error) { console.log('WS: Error - ' + error.message) }
   onMessage(event) {
     console.log('WS: Data received - ' + event.data)
     const data = JSON.parse(event.data)
     if (data.pointer) {
       $store.dispatch(setAnotherPointerCoords(data.pointer))
     }
-  },
+  }
 
   waitForConnection(callback, interval) {
     if (this.socket && this.socket.readyState === 1) {
@@ -40,7 +50,7 @@ const webSocket = {
     setTimeout(() => {
       this.waitForConnection(callback, interval)
     }, interval)
-  },
+  }
 
   send(data) {
     this.waitForConnection(() => {
@@ -48,6 +58,8 @@ const webSocket = {
     }, 300)
   }
 }
+
+const webSocket = new ClientWebSocket()
 
 const iconActions = {
   create: 'create',
