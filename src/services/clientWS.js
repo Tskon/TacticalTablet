@@ -1,8 +1,12 @@
 import {setAnotherPointerCoords} from '~/store/wsDataSlice'
 let socket = null
 
+function openSocket(id) {
+  new WebSocket(`ws://127.0.0.1:4321/${id}`)
+}
+
 function connectToWebSocket(tabletId) {
-  socket = new WebSocket(`ws://127.0.0.1:4321/${tabletId}`)
+  socket = openSocket(tabletId)
 
   socket.onopen = () => {
     console.log('WS: Connection success')
@@ -13,6 +17,7 @@ function connectToWebSocket(tabletId) {
       console.log('WS: Connection closed clear')
     } else {
       console.log('WS: Connection closed with error')
+      socket = openSocket(tabletId)
     }
     console.log('WS: Code - ' + event.code + ' reason - ' + event.reason)
   }
