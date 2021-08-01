@@ -16,7 +16,7 @@ function connectToWebSocket(tabletId) {
     if (event.wasClean) {
       console.log('WS: Connection closed clear')
     } else {
-      console.log('WS: Connection closed with error')
+      console.log('WS: Connection closed with error, trying reconnect')
       socket = openSocket(tabletId)
     }
     console.log('WS: Code - ' + event.code + ' reason - ' + event.reason)
