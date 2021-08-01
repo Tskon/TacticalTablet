@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 import Pixi from '~/components/pixi'
 import jsCookie from 'js-cookie'
-import {connectToWebSocket} from '~/services/clientWS'
+import {webSocket} from '~/services/clientWS'
 import copyToClipboard from '~/services/copyToClipboard'
 import {fetchListFromCookie} from '~/store/tabletListSlice'
 import {setIconData} from '~/store/tabletDataSlice'
@@ -31,7 +31,7 @@ function Tablet({slug}) {
 
       axios
         .get( `${process.env.API_URL}/createWs`, {params: {tabletId: viewId}})
-        .then(connectToWebSocket(viewId))
+        .then(webSocket.initWebSocket(viewId))
     }
   }, [])
 

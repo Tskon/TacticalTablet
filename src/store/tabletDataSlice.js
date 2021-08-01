@@ -1,10 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {socket, iconActions} from '~/services/clientWS'
+import {webSocket, iconActions} from '~/services/clientWS'
 
 function sendIconData(payload) {
   const type = payload.img ? iconActions.create : iconActions.update
-  if (!socket) return
-  socket.sendString({
+  webSocket.send({
     icon: {
       type,
       payload,
@@ -26,7 +25,7 @@ const tabletDataSlice = createSlice({
   reducers: {
     setPointerCoords: (state, {payload: {x, y}}) => {
       state.userPointer = {x, y}
-      socket.sendString({
+      webSocket.send({
         pointer: {x, y}
       })
     },
