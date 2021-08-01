@@ -18,7 +18,6 @@ const debouncedUpdateIcon = debounce(updateIcon, 300)
 export const iconHandler = ({type, payload}, id) => {
   switch (type) {
   case 'create':
-    console.log('id: ', id)
     createIcon(payload, id)
     break
   case 'update':

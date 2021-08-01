@@ -8,8 +8,7 @@ function createWebSocketServer(wsId) {
 
   serversList[wsId] = new WebSocket.Server({port: 4321, path: `/${wsId}`})
   serversList[wsId].on('connection', (ws, req) => {
-    console.log('REQUEST URL:', req.url)
-    console.log('WS: connected')
+    console.log(`REQUEST URL: ${req.url}`, '\n', 'WS: connected')
     ws.on('message', function incoming(message) {
       serversList[wsId].clients.forEach((client) => {
         if (client !== ws && client.readyState === WebSocket.OPEN) {
