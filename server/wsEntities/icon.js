@@ -2,10 +2,12 @@ import debounce from 'lodash/debounce.js'
 import Tablet from '../dbModels/Tablet.js'
 
 async function createIcon(payload, id) {
+  const isIconExist = Boolean(await Tablet.findOne({viewId: id, icons: {$elemMatch: {id: payload.id}}}))
+  if (isIconExist) return
+
   await Tablet.updateOne(
     {viewId: id},
-    {$addToSet: {icons: [payload]}},
-    {arrayFilters: [ {'elem.id': payload.id} ]}
+    {$push: {'icons': payload}},
   )
 }
 
