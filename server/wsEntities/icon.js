@@ -2,7 +2,11 @@ import debounce from 'lodash/debounce.js'
 import Tablet from '../dbModels/Tablet.js'
 
 async function createIcon(payload, id) {
-  await Tablet.updateOne({viewId: id}, {$addToSet: {icons: [payload]}},)
+  await Tablet.updateOne(
+    {viewId: id},
+    {$addToSet: {icons: [payload]}},
+    {arrayFilters: [ {'elem.id': payload.id} ]}
+  )
 }
 
 async function updateIcon(payload, id) {
