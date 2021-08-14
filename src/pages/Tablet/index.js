@@ -25,7 +25,7 @@ function Tablet({slug}) {
 
       if (icons && icons.length) {
         icons.forEach(icon => {
-          dispatch(setIconData(icon))
+          dispatch(setIconData({data: icon}))
         })
       }
 

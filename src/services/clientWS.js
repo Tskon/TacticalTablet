@@ -1,4 +1,5 @@
 import {setAnotherPointerCoords} from '~/store/wsDataSlice'
+import {setIconData} from '~/store/tabletDataSlice'
 
 class ClientWebSocket {
   constructor() {
@@ -39,6 +40,9 @@ class ClientWebSocket {
     const data = JSON.parse(event.data)
     if (data.pointer) {
       $store.dispatch(setAnotherPointerCoords(data.pointer))
+    }
+    if (data.icon) {
+      $store.dispatch(setIconData({data: data.icon.payload, isGetFromServer: true}))
     }
   }
 

@@ -15,11 +15,11 @@ export default function CanvasWrapper() {
   const canvas = useRef()
 
   const onMoveCb = ({id, x, y}) => {
-    dispatch(setIconData({
+    dispatch(setIconData({data: {
       id,
       x: Math.round(x),
       y: Math.round(y),
-    }))
+    }}))
   }
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export default function CanvasWrapper() {
     const iconId = iconFactory.add(newIcon, throttle(onMoveCb, 1000 / 60))
     newIcon.id = iconId
 
-    dispatch(setIconData(newIcon))
+    dispatch(setIconData({data: newIcon}))
     dispatch(setAddMode(false))
   }
 

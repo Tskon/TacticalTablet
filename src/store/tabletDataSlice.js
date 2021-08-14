@@ -30,13 +30,14 @@ const tabletDataSlice = createSlice({
       })
     },
 
-    setIconData: (state, {payload}) => {
-      sendIconData(payload)
-      const icon = state.icons[payload.id]
+    setIconData: (state, {payload: {data, isGetFromServer}}) => {
+      if (!isGetFromServer) sendIconData(data)
+
+      const icon = state.icons[data.id]
       if (icon) {
-        state.icons[payload.id] = {...icon, ...payload}
+        state.icons[data.id] = {...icon, ...data}
       } else {
-        state.icons[payload.id] = payload
+        state.icons[data.id] = data
       }
     }
   }
