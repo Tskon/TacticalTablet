@@ -6,8 +6,9 @@ import Pixi from '~/components/pixi'
 import jsCookie from 'js-cookie'
 import {webSocket} from '~/services/clientWS'
 import copyToClipboard from '~/services/copyToClipboard'
-import {fetchListFromCookie} from '~/store/tabletListSlice'
+import {setList} from '~/store/tabletListSlice'
 import {setIconData} from '~/store/tabletDataSlice'
+import getTablets from '~/common/js/getTablets'
 
 function Tablet({slug}) {
   const dispatch = useDispatch()
@@ -35,9 +36,9 @@ function Tablet({slug}) {
     }
   }, [])
 
-  useEffect(() => {
+  useEffect(async () => {
     if (!tabletList) {
-      dispatch(fetchListFromCookie())
+      dispatch(setList(await getTablets()))
       return
     }
     const resultList = tabletList.includes(slug) ? tabletList : [...tabletList, slug]
