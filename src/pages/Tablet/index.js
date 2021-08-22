@@ -1,12 +1,19 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch} from 'react-redux'
 import PropTypes from 'prop-types'
-import axios from 'axios'
 import Pixi from '~/components/pixi'
 import jsCookie from 'js-cookie'
-import {webSocket} from '~/services/clientWS'
 import copyToClipboard from '~/services/copyToClipboard'
 import {setIconData} from '~/store/tabletDataSlice'
+import getTablet from '~/services/api/getTablet'
+import connectToTabletSocket from '~/services/api/connectToTabletSocket'
+
+const updateTabletsInCookies = (currentTabletId) => {
+  const tabletsCookie = jsCookie.get('tablets')
+  const tablets = tabletsCookie ? JSON.parse(tabletsCookie) : []
+  const resultList = tablets.includes(currentTabletId) ? tablets : [...tablets, currentTabletId]
+  jsCookie.set('tablets', resultList, {expires: +process.env.EXPIRE_PERIOD})
+}
 
 function Tablet({slug}) {
   const dispatch = useDispatch()
@@ -14,8 +21,8 @@ function Tablet({slug}) {
   const [tabletIds, setTabletIds] = useState({})
 
   useEffect(async () => {
-    const {data, status} = await axios.get(`${process.env.API_URL}/tablet?id=${slug}`)
-    if (status === 200) {
+    const data = await getTablet(slug)
+    if (data) {
       const {icons, editId, viewId} = data
       setTabletIds({editId, viewId})
       if (icons && icons.length) {
@@ -23,14 +30,10 @@ function Tablet({slug}) {
           dispatch(setIconData({data: icon}))
         })
       }
-      await axios.post( `${process.env.API_URL}/createWs`, {tabletId: viewId})
-      webSocket.initWebSocket(viewId)
+      connectToTabletSocket(viewId)
     }
 
-    const tabletsCookie = jsCookie.get('tablets')
-    const tablets = tabletsCookie ? JSON.parse(tabletsCookie) : []
-    const resultList = tablets.includes(slug) ? tablets : [...tablets, slug]
-    jsCookie.set('tablets', resultList, {expires: +process.env.EXPIRE_PERIOD})
+    updateTabletsInCookies(slug)
   }, [])
 
   const tabletShareLinks = Object.values(tabletIds).map(id => {
