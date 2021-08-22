@@ -1,5 +1,39 @@
-.tabletsList {
+.wrapper {
+  display: flex;
+  padding: $offset;
+}
+
+.tabletListWrapper {
+  width: 100%;
+  margin-right: $offset;
+}
+
+.tabletList {
   display: flex;
   flex-direction: column;
   padding: $offset;
+}
+
+.newTabletWrapper {
+  width: 360px;
+
+  .newTabletInput {
+    margin-bottom: $offset;
+  }
+
+  .newTabletAspectRatioTitle {
+    margin-bottom: $offset-xsmall;
+  }
+
+  .newTabletAspectRatio {
+    display: flex;
+
+    .newTabletInput {
+      margin-bottom: 0;
+
+      &:not(:last-child) {
+        margin-right: $offset-xsmall;
+      }
+    }
+  }
 }
