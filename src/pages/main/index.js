@@ -5,8 +5,8 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import CardHeader from '@material-ui/core/CardHeader'
 import {fetchListFromCookie} from '~/store/tabletListSlice'
-import styles from './index.scss'
 import NewTablet from '~/pages/main/components/NewTablet'
+import styles from './index.scss'
 
 export default function Main() {
   const dispatch = useDispatch()

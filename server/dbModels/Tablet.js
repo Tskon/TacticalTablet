@@ -5,6 +5,8 @@ const {Schema} = mongoose
 const TabletSchema = new Schema({
   editId: String,
   viewId: String,
+  title: String,
+  aspectRatio: Number,
   icons: [{
     _id: false,
     id: String,

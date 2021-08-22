@@ -3,9 +3,13 @@ import Tablet from '../dbModels/Tablet.js'
 
 export default {
   async create(req, res) {
+    const {title, aspectRatio} = req.body
+
     const tabletData = await Tablet.create({
       editId: `edit-${uuid()}`,
       viewId: `view-${uuid()}`,
+      title,
+      aspectRatio
     })
 
     const {editId} = tabletData._doc
@@ -22,12 +26,13 @@ export default {
     const isEditId = /^edit-/.test(id)
     const filter = isEditId ? {editId: id} : {viewId: id}
     const selectFields = {
-      viewId: 1,
-      icons: 1,
       _id: 0,
+      __v: 0,
+      createdAt: 0,
+      updatedAt: 0,
     }
-    if (isEditId) {
-      selectFields.editId = 1
+    if (!isEditId) {
+      selectFields.editId = 0
     }
     const findedTablet = await Tablet.findOne(filter).select(selectFields)
 
