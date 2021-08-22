@@ -27,10 +27,13 @@ export default function NewTablet() {
   const [aspectHeight, setAspectHeight] = useState(9)
   const aspectHeightHandler = (e) => {setAspectHeight(Number(e.target.value))}
 
-  async function onCreateTablet() {
+  async function onCreateTablet(e) {
+    e.preventDefault()
+
+    const aspectRatio = aspectWidth / aspectHeight
     const {status, editId} = await createTablet({
       title,
-      aspectRatio: aspectWidth / aspectHeight
+      aspectRatio: Number(aspectRatio.toFixed(2))
     })
     if (status === 'ok') return history.push(`/tablet/${editId}`)
   }
