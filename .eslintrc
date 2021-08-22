@@ -17,5 +17,8 @@
   "env": {
     "browser": true,
     "node": true
+  },
+  "globals": {
+    "$store": "readonly"
   }
 }
