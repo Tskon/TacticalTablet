@@ -5,6 +5,10 @@ export default {
   async create(req, res) {
     const {title, aspectRatio} = req.body
 
+    if (!title || !aspectRatio) {
+      return res.status(500).send({status: 'error', message: 'INCORRECT_DATA'})
+    }
+
     const tabletData = await Tablet.create({
       editId: `edit-${uuid()}`,
       viewId: `view-${uuid()}`,
