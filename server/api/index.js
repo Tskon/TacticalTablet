@@ -8,9 +8,9 @@ router.post('/tablet', tablet.create)
 router.get('/tablet', tablet.get)
 router.get('/tablet-list', tablet.getList)
 
-router.get('/createWs', (req, res) => {
-  createWebSocketServer(req.query.tabletId)
-  res.send({status: 'ok'})
+router.post('/createWs', (req, res) => {
+  createWebSocketServer(req.body.tabletId)
+  res.send()
 })
 
 export default router

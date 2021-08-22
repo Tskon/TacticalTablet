@@ -23,7 +23,7 @@ function Tablet({slug}) {
           dispatch(setIconData({data: icon}))
         })
       }
-      await axios.get( `${process.env.API_URL}/createWs`, {params: {tabletId: viewId}})
+      await axios.post( `${process.env.API_URL}/createWs`, {tabletId: viewId})
       webSocket.initWebSocket(viewId)
     }
 
