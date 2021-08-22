@@ -1,0 +1,21 @@
+.newTablet {
+  .input {
+    margin-bottom: $offset;
+  }
+
+  .aspectRatioTitle {
+    margin-bottom: $offset-xsmall;
+  }
+
+  .aspectRatio {
+    display: flex;
+
+    .input {
+      margin-bottom: 0;
+
+      &:not(:last-child) {
+        margin-right: $offset-xsmall;
+      }
+    }
+  }
+}
