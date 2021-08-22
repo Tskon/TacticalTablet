@@ -1,4 +1,4 @@
-import api from '~/common/js/api'
+import api from '~/services/api'
 import jsCookie from 'js-cookie'
 
 export default async () => {

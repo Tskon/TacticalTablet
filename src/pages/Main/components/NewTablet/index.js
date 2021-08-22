@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
-import createTablet from '~/common/js/createTablet'
+import createTablet from '~/services/api/createTablet'
 import styles from './index.scss'
 import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'

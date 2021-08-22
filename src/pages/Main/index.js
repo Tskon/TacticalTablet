@@ -6,7 +6,7 @@ import CardContent from '@material-ui/core/CardContent'
 import CardHeader from '@material-ui/core/CardHeader'
 import {setList} from '~/store/tabletListSlice'
 import NewTablet from '~/pages/Main/components/NewTablet'
-import getTablets from '~/common/js/getTablets'
+import getTablets from '~/services/api/getTablets'
 import styles from './index.scss'
 
 export default function Main() {

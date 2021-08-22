@@ -1,4 +1,4 @@
-import api from '~/common/js/api'
+import api from '~/services/api'
 
 export default async (payload = {
   title: '',
