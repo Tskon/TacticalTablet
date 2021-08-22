@@ -1,21 +1,22 @@
 import {createSlice} from '@reduxjs/toolkit'
-import jsCookie from 'js-cookie'
 
 const tabletDataSlice = createSlice({
   name: 'tabletList',
 
   initialState: {
-    list: null
+    editList: [],
+    viewList: [],
   },
 
   reducers: {
-    fetchListFromCookie: (state) => {
-      const tabletsCookie = jsCookie.get('tablets')
-      state.list = tabletsCookie ? JSON.parse(tabletsCookie) : []
-    },
+    setList: (state, {payload}) => {
+      if (!payload) return
+      state.editList = payload.editList || []
+      state.viewList = payload.viewList || []
+    }
   }
 })
 
-export const {fetchListFromCookie} = tabletDataSlice.actions
+export const {setList} = tabletDataSlice.actions
 
 export default tabletDataSlice.reducer
