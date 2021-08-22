@@ -12,7 +12,13 @@ import {useHistory} from 'react-router-dom'
 export default function NewTablet() {
   const history = useHistory()
 
-  const [title, setTitle] = useState('Тактический планшет')
+  const date = new Date()
+  const day = date.getDate()
+  const month = date.getMonth() + 1
+  const year = date.getFullYear()
+  const hours = date.getHours()
+  const minutes = date.getMinutes()
+  const [title, setTitle] = useState(`Планшет ${day}/${month}/${year} ${hours}:${minutes}`)
   const titleHandler = (e) => {setTitle(e.target.value)}
 
   const [aspectWidth, setAspectWidth] = useState(16)
