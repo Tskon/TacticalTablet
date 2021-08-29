@@ -21,6 +21,7 @@ function createWebSocketServer(wsId) {
       try {
         const data = JSON.parse(message)
         if (data.icon) {
+          console.log(data, wsId)
           iconHandler(data.icon, wsId)
         }
       } catch {
@@ -37,8 +38,9 @@ httpServer.on('upgrade', function upgrade(request, socket, head) {
     socket.destroy()
     return
   }
-  createWebSocketServer(pathname)
-  const wss = serversList[pathname]
+  const wsId = pathname.replace(/^\//, '')
+  createWebSocketServer(wsId)
+  const wss = serversList[wsId]
   wss.handleUpgrade(request, socket, head, function done(ws) {
     wss.emit('connection', ws, request)
   })
