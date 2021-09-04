@@ -15,7 +15,7 @@ const updateTabletsInCookies = (currentTabletId) => {
   jsCookie.set('tablets', resultList, {expires: +process.env.EXPIRE_PERIOD})
 }
 
-function Tablet({slug}) {
+const Tablet = ({slug}) => {
   const dispatch = useDispatch()
 
   const [tabletIds, setTabletIds] = useState({})
