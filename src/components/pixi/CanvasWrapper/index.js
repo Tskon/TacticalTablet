@@ -4,13 +4,14 @@ import {throttle} from 'lodash'
 import {setAddMode} from '~/store/createIconSlice'
 import {setPointerCoords, setIconData} from '~/store/tabletDataSlice'
 import styles from './CanvasWrapper.scss'
-import pixiApp from '~/services/pixiApp'
-import IconFactory from '~/services/IconFactory';
+import createPixiApp from '~/services/pixiApp'
+import IconFactory from '~/services/IconFactory'
 import Cursor from '~/common/images/cursor.svg'
+import PropTypes from 'prop-types'
 
-const iconFactory = new IconFactory(pixiApp)
-
-export default function CanvasWrapper() {
+const CanvasWrapper = ({width, height}) => {
+  const pixiApp = createPixiApp(width, height)
+  const iconFactory = new IconFactory(pixiApp)
   const dispatch = useDispatch()
   const canvas = useRef()
 
@@ -86,6 +87,7 @@ export default function CanvasWrapper() {
     >
       <div
         ref={canvas}
+        style={{width, height}}
         className={styles.canvas}
       >
       </div>
@@ -93,3 +95,10 @@ export default function CanvasWrapper() {
     </div>
   )
 }
+
+CanvasWrapper.propTypes = {
+  width: PropTypes.number,
+  height: PropTypes.number,
+}
+
+export default CanvasWrapper

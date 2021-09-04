@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Wrapper from '~/components/pixi/Wrapper'
 import CanvasWrapper from '~/components/pixi/CanvasWrapper'
 import Panel from './Panel'
@@ -10,12 +11,28 @@ import art from '~/common/images/wot/art.png'
 
 const icons = [light, medium, heavy, art, light, medium, heavy, art, light, medium, heavy, art]
 
-export default () => {
+const Pixi = ({aspectRatio}) => {
+  const panelWidth = 320
+  const resultWidth = window.innerWidth - panelWidth
+  const resultHeight = resultWidth / aspectRatio
+  console.log(resultWidth, resultHeight, aspectRatio)
   return (
     <Wrapper>
-      <CanvasWrapper></CanvasWrapper>
-      <Panel icons={icons}></Panel>
+      <CanvasWrapper
+        width={resultWidth}
+        height={resultHeight}
+      />
+      <Panel
+        width={panelWidth}
+        icons={icons}
+      />
     </Wrapper>
   )
 }
+
+Pixi.propTypes = {
+  aspectRatio: PropTypes.arrayOf(PropTypes.number)
+}
+
+export default Pixi
 

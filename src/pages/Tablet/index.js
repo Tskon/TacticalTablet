@@ -19,12 +19,14 @@ function Tablet({slug}) {
   const dispatch = useDispatch()
 
   const [tabletIds, setTabletIds] = useState({})
+  const [aspectRatio, setAspectRatio] = useState(1)
 
   useEffect(async () => {
     const data = await getTablet(slug)
     if (data) {
-      const {icons, editId, viewId} = data
+      const {icons, editId, viewId, aspectRatio} = data
       setTabletIds({editId, viewId})
+      setAspectRatio(aspectRatio)
       if (icons && icons.length) {
         icons.forEach(icon => {
           dispatch(setIconData({data: icon}))
@@ -58,7 +60,7 @@ function Tablet({slug}) {
       <div>
         {tabletShareLinks}
       </div>
-      <Pixi/>
+      <Pixi aspectRatio={aspectRatio}/>
     </div>
   )
 }
