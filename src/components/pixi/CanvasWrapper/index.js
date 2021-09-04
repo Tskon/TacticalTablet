@@ -9,8 +9,13 @@ import IconFactory from '~/services/IconFactory'
 import Cursor from '~/common/images/cursor.svg'
 import PropTypes from 'prop-types'
 
+let pixiApp = null
+
 const CanvasWrapper = ({width, height}) => {
-  const pixiApp = createPixiApp(width, height)
+  if (!pixiApp) {
+    pixiApp = createPixiApp(width, height)
+  }
+
   const iconFactory = new IconFactory(pixiApp)
   const dispatch = useDispatch()
   const canvas = useRef()
