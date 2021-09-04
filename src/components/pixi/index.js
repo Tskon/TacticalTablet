@@ -15,7 +15,7 @@ const Pixi = ({aspectRatio}) => {
   const panelWidth = 320
   const resultWidth = window.innerWidth - panelWidth
   const resultHeight = resultWidth / aspectRatio
-  console.log(resultWidth, resultHeight, aspectRatio)
+
   return (
     <Wrapper>
       <CanvasWrapper
@@ -31,7 +31,7 @@ const Pixi = ({aspectRatio}) => {
 }
 
 Pixi.propTypes = {
-  aspectRatio: PropTypes.arrayOf(PropTypes.number)
+  aspectRatio: PropTypes.number
 }
 
 export default Pixi

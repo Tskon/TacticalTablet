@@ -19,7 +19,7 @@ function Tablet({slug}) {
   const dispatch = useDispatch()
 
   const [tabletIds, setTabletIds] = useState({})
-  const [aspectRatio, setAspectRatio] = useState(1)
+  const [aspectRatio, setAspectRatio] = useState(null)
 
   useEffect(async () => {
     const data = await getTablet(slug)
@@ -60,7 +60,7 @@ function Tablet({slug}) {
       <div>
         {tabletShareLinks}
       </div>
-      <Pixi aspectRatio={aspectRatio}/>
+      {aspectRatio && <Pixi aspectRatio={aspectRatio}/>}
     </div>
   )
 }
