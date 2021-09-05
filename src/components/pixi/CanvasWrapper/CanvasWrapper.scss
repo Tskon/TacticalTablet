@@ -3,7 +3,8 @@
 }
 
 .canvas {
-  width: calc(100% - #{$panel-width});
+  transform-origin: top left;
+
 }
 
 .cursor {

@@ -11,9 +11,13 @@ import PropTypes from 'prop-types'
 
 let pixiApp = null
 
-const CanvasWrapper = ({width, height}) => {
+const CanvasWrapper = ({width, height, aspectRatio}) => {
+  const canvasWidth = 1024
+  const canvasHeight = canvasWidth / aspectRatio
+  const zoom = width / canvasWidth
+
   if (!pixiApp) {
-    pixiApp = createPixiApp(width, height)
+    pixiApp = createPixiApp(canvasWidth, canvasHeight)
   }
 
   const iconFactory = new IconFactory(pixiApp)
@@ -87,15 +91,15 @@ const CanvasWrapper = ({width, height}) => {
   return (
     <div
       className={styles.wrapper}
+      style={{width, height}}
       onClick={createIcon}
       onMouseMove={setPoiterCoords}
     >
       <div
         ref={canvas}
-        style={{width, height}}
+        style={{transform: `scale(${zoom})`}}
         className={styles.canvas}
-      >
-      </div>
+      />
       { pointer && cursorImg }
     </div>
   )
@@ -104,6 +108,7 @@ const CanvasWrapper = ({width, height}) => {
 CanvasWrapper.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
+  aspectRatio: PropTypes.number,
 }
 
 export default CanvasWrapper

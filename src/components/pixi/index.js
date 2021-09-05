@@ -21,6 +21,7 @@ const Pixi = ({aspectRatio}) => {
       <CanvasWrapper
         width={resultWidth}
         height={resultHeight}
+        aspectRatio={aspectRatio}
       />
       <Panel
         width={panelWidth}
