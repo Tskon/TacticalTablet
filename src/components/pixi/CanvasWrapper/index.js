@@ -83,8 +83,8 @@ const CanvasWrapper = ({width, height, aspectRatio}) => {
     src={Cursor}
     className={styles.cursor}
     style={{
-      top: pointer ? pointer.y : 0,
-      left: pointer ? pointer.x : 0,
+      top: pointer ? (pointer.y * zoom) : 0,
+      left: pointer ? (pointer.x * zoom) : 0,
     }}
   ></img>
 
